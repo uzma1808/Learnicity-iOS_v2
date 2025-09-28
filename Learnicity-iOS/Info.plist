@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera is needed to scann QR code.</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Roboto-ExtraLight.ttf</string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Roboto-SemiBold.ttf</string>
+		<string>Roboto-Thin.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-ExtraBold.ttf</string>
+		<string>Roboto-Black.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Light.ttf</string>
+	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location is used to show nearby businesses on the map.</string>
+</dict>
+</plist>
