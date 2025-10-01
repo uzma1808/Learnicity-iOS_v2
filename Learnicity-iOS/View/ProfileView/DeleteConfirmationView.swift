@@ -1,0 +1,64 @@
+//
+//  DeleteConfirmationView.swift
+//  Learnicity-iOS
+//
+//  Created by UzmaKhan on 02/10/2025.
+//
+
+import SwiftUI
+
+struct DeleteConfirmationView: View {
+    @Binding var isPresented: Bool
+    var action: () -> Void?
+
+    var body: some View {
+        VStack(spacing: 40) {
+            Text("Delete Account")
+                .customFont(style: .bold, size: .h20)
+            Text("Are you sure want to Delete your Account?")
+                .customFont(style: .semiBold, size: .h18)
+            HStack {
+                Button(action: {
+                    isPresented = false
+                }) {
+                    Text("Cancel")
+                        .customFont(style: .bold, size: .h18)
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(.clear)
+                        .cornerRadius(8)
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(.black, lineWidth: 1)
+                )
+
+                Button(action: {
+                    isPresented = false
+                    action()
+                }) {
+                    Text("Delete")
+                        .customFont(style: .bold, size: .h18)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(.red)
+                        .cornerRadius(8)
+                }
+            }
+
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 24)
+        .background(Color.white)
+        .cornerRadius(20)
+        .frame(maxWidth: .infinity)
+        .padding(.bottom, 0)
+        .frame(maxHeight: .infinity, alignment: .bottom)
+    }
+}
+
+#Preview {
+    DeleteConfirmationView(isPresented: .constant(false), action: {})
+}

@@ -51,8 +51,8 @@ struct HomeView: View {
                 .customFont(style: .black, size: .h32)
             Spacer()
             Button(action: {
-                UserSession.shared.clear()
-                path.popToRoot(index: 0)
+                path.push(screen: .profileView)
+
             }) {
                 Image(.profile)
                     .resizable()

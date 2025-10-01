@@ -13,6 +13,9 @@
 		FA169B522E887DB8003606EB /* RedeemFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA169B512E887DB8003606EB /* RedeemFailedView.swift */; };
 		FA169B542E888573003606EB /* QuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA169B532E88856B003606EB /* QuizModel.swift */; };
 		FA169B562E8886E0003606EB /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA169B552E8886E0003606EB /* QuizView.swift */; };
+		FA5AC3292E8DB1350002C581 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AC3282E8DB1350002C581 /* ProfileView.swift */; };
+		FA5AC32B2E8DBEA20002C581 /* SignoutConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AC32A2E8DBEA10002C581 /* SignoutConfirmationView.swift */; };
+		FA5AC32D2E8DC1B00002C581 /* DeleteConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AC32C2E8DC1B00002C581 /* DeleteConfirmationView.swift */; };
 		FA7297EF2E73476F008C5B3B /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7297EE2E734768008C5B3B /* Endpoints.swift */; };
 		FA79CB042E3D389900CF57D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA79CAF12E3D389900CF57D0 /* Preview Assets.xcassets */; };
 		FA79CB052E3D389900CF57D0 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA79CAF32E3D389900CF57D0 /* Roboto-Black.ttf */; };
@@ -104,6 +107,9 @@
 		FA169B512E887DB8003606EB /* RedeemFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemFailedView.swift; sourceTree = "<group>"; };
 		FA169B532E88856B003606EB /* QuizModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModel.swift; sourceTree = "<group>"; };
 		FA169B552E8886E0003606EB /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		FA5AC3282E8DB1350002C581 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		FA5AC32A2E8DBEA10002C581 /* SignoutConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutConfirmationView.swift; sourceTree = "<group>"; };
+		FA5AC32C2E8DC1B00002C581 /* DeleteConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationView.swift; sourceTree = "<group>"; };
 		FA7297EE2E734768008C5B3B /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		FA79CAAB2E3D30DC00CF57D0 /* Learnicity-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learnicity-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA79CABB2E3D30DF00CF57D0 /* Learnicity-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Learnicity-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +230,16 @@
 			path = QRScanner;
 			sourceTree = "<group>";
 		};
+		FA5AC3272E8DB11B0002C581 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				FA5AC3282E8DB1350002C581 /* ProfileView.swift */,
+				FA5AC32A2E8DBEA10002C581 /* SignoutConfirmationView.swift */,
+				FA5AC32C2E8DC1B00002C581 /* DeleteConfirmationView.swift */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
 		FA79CAA22E3D30DC00CF57D0 = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +338,7 @@
 		FA79CB172E3D3A6300CF57D0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FA5AC3272E8DB11B0002C581 /* ProfileView */,
 				FA169B4A2E886535003606EB /* QRScanner */,
 				FA9ADB002E7B06ED00FEBDCD /* BusinessDetailsView */,
 				FAC425D72E5E400100875F80 /* BusinessMap */,
@@ -745,14 +762,17 @@
 				FA9ADB022E7B070C00FEBDCD /* BusinessDetailsView.swift in Sources */,
 				FACCBEF02E3E8CF200CDA26C /* SignupView.swift in Sources */,
 				FA9ADAEF2E78A6C900FEBDCD /* QuizSettings.swift in Sources */,
+				FA5AC32D2E8DC1B00002C581 /* DeleteConfirmationView.swift in Sources */,
 				FA169B4C2E886549003606EB /* QRScannerView.swift in Sources */,
 				FA9ADADB2E7830C000FEBDCD /* ErrorView.swift in Sources */,
 				FA79CB202E3D3D1100CF57D0 /* Route.swift in Sources */,
+				FA5AC3292E8DB1350002C581 /* ProfileView.swift in Sources */,
 				FAD9BA642E50A8A700541219 /* StreakView.swift in Sources */,
 				FA169B522E887DB8003606EB /* RedeemFailedView.swift in Sources */,
 				FA9ADAED2E78A2C600FEBDCD /* HomeViewModel.swift in Sources */,
 				FA9ADAF12E78A79100FEBDCD /* SubjectViewModel.swift in Sources */,
 				FAC2EEC62E4FC79B005A51E8 /* OnboardingWelcomeView.swift in Sources */,
+				FA5AC32B2E8DBEA20002C581 /* SignoutConfirmationView.swift in Sources */,
 				FAC2EEC32E4FBEAA005A51E8 /* ForgotPasswordView.swift in Sources */,
 				FAC425DF2E5E42F000875F80 /* AppDelegate.swift in Sources */,
 				FA9ADAF32E79F7D900FEBDCD /* BusinessModel.swift in Sources */,

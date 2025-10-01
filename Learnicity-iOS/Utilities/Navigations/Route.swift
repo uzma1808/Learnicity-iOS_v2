@@ -26,6 +26,7 @@ enum Route: Hashable {
     case scanner(Product)
     case redeemSuccess(Product)
     case redeemFailed
+    case profileView
 
 }
 extension NavigationPath {

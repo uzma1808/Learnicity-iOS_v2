@@ -42,7 +42,8 @@ extension SplashView {
             RedeemSuccessView(productDetails: product, path: $path)
         case .redeemFailed:
             RedeemFailedView(path: $path)
-
+        case .profileView:
+            ProfileView(path: $path)
 
         }
     }
