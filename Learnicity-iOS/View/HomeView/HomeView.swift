@@ -52,11 +52,34 @@ struct HomeView: View {
             Spacer()
             Button(action: {
                 path.push(screen: .profileView)
-
             }) {
-                Image(.profile)
-                    .resizable()
-                    .frame(width: 32, height: 32)
+                AsyncImage(url: URL(string: UserSession.shared.user?.profile_image ?? "")) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 32, height: 32)
+                            .clipShape(Circle())
+
+                    case .success(let image):
+                        image.resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 32, height: 32)
+                            .clipShape(Circle())
+
+                    case .failure:
+                        Image(.user)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 32, height: 32)
+                            .clipShape(Circle())
+
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+                .frame(width: 32, height: 32)
+                .clipShape(Circle())
+
             }
         }
     }
@@ -66,9 +89,10 @@ struct HomeView: View {
             path.push(screen: .streak)
         }) {
             VStack {
-                Image(.streak)
-                    .resizable()
-                    .frame(width: 32, height: 32)
+                LottieView(name: "streak", loopMode: .loop) {
+
+                }
+                .frame(width: 50, height: 50)
                 Text(String(viewModel.homeData?.userStreak ?? 0) )
                     .customFont(style: .bold, size: .h24)
                     .foregroundStyle(.black)
@@ -86,14 +110,14 @@ struct HomeView: View {
     }
 
     var BusinessView: some View {
-        
+
         Button(action: {
             path.push(screen: .businessList)
         }) {
             VStack {
                 Image(.business)
                     .resizable()
-                    .frame(width: 32, height: 32)
+                    .frame(width: 50, height: 50)
                 Text(String(viewModel.homeData?.redeemableCoins ?? 0))
                     .customFont(style: .bold, size: .h24)
                     .foregroundStyle(.black)
@@ -113,9 +137,10 @@ struct HomeView: View {
             path.push(screen: .leaderboard)
         }, label: {
             HStack {
-                Image(.coin)
-                    .resizable()
-                    .frame(width: 60, height: 60)
+                LottieView(name: "coin", loopMode: .loop) {
+
+                }
+                    .frame(width: 70, height: 70)
                     .padding(.leading, 16)
                 Text(String(viewModel.homeData?.totalCoins ?? 0))
                     .customFont(style: .black, size: .h36)

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct RedeemSuccessView: View {
     @State private var scannedCode: String? = nil
@@ -24,7 +25,7 @@ struct RedeemSuccessView: View {
                 .multilineTextAlignment(.center)
 
             // Subtitle
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore")
+            Text("Congrats on the Prize! Show this screen to the associate. Keep Learning to get Free Things!")
                 .customFont(style: .regular, size: .h18)
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
@@ -32,34 +33,27 @@ struct RedeemSuccessView: View {
             Spacer()
             // QR Scanner
             ZStack {
-                AsyncImage(url: URL(string: productDetails?.image ?? "")) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                            .frame(width: 50, height: 50)
-
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .frame(width: 200, height: 200)
-
-                    case .failure:
-                        Image(.product) // fallback if failed
-                            .resizable()
-                            .frame(width: 200, height: 200)
-
-                    @unknown default:
-                        EmptyView()
+                WebImage(url: URL(string: productDetails?.image ?? "")) { image in
+                        image.resizable()
+                    } placeholder: {
+                            Rectangle().foregroundColor(.lightgraybg)
                     }
-                }
+                    .onSuccess { image, data, cacheType in  }
+                    .indicator(.activity)
+                    .transition(.fade(duration: 0.5))
+                    .scaledToFit()
+                    .frame(width: 200, height: 200, alignment: .center)
+                    .cornerRadius(30)
+
             }
+
             Spacer()
             // Result or Hint
             HStack {
                 Text("You have ")
                     .font(.headline)
                 +
-                Text("\(UserSession.shared.redeemableCoins) ")
+                Text("\(productDetails?.requiredCoins ?? 0) ")
                     .font(.headline)
                     .foregroundColor(.green)
                 +

@@ -15,7 +15,7 @@ struct SuccessView: View {
             .foregroundColor(.white)
             .padding(EdgeInsets(top: 60, leading: 32, bottom: 16, trailing: 32))
             .frame(maxWidth: .infinity)
-            .background(Color.red)
+            .background(.greenfont)
     }
 }
 

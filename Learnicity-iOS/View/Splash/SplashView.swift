@@ -13,10 +13,13 @@ struct SplashView: View {
     var body: some View {
         NavigationStack(path: $path, root: {
             ZStack {
-                Color.maintheme
-                Text("Learnicity")
-                    .customFont(style: .black, size: .h50)
-                    .foregroundStyle(.white)
+                Color.splashbg
+                Image("logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 48)
+                    .padding([.leading, .trailing], 20)
             }
             .ignoresSafeArea()
             .navigationDestination(for: Route.self) { routes in
@@ -29,7 +32,7 @@ struct SplashView: View {
                         if UserSession.shared.selectedSubject != nil {
                             path.push(screen: .home)
                         } else {
-                            path.push(screen: .chooseSubject)
+                            path.push(screen: .chooseSubject(settings: false))
                         }
                     } else {
                         let loginView = Route.loginView

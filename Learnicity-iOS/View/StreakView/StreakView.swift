@@ -18,9 +18,8 @@ struct StreakView: View {
             Color.clear
                 .frame(height: screenHeight * 0.20)
             VStack(spacing: 30) {
-                Image(.streak2)
-                    .resizable()
-                    .frame(width: 120, height: 120)
+                LottieView(name: "streak", loopMode: .loop) {}
+                    .frame(width: 140, height: 140)
                 Text("You’re on a\n\(UserSession.shared.fetchUserStreak()) Day\nLearning Streak!")
                     .customFont(style: .black, size: .h36)
                     .multilineTextAlignment(.center)

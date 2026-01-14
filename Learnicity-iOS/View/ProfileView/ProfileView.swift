@@ -7,13 +7,14 @@
 
 import SwiftUI
 import PopupView
-
+import SDWebImageSwiftUI
 
 struct ProfileView: View {
 
     @Binding var path: NavigationPath
     @State private var showLogout: Bool = false
     @State private var showDelete: Bool = false
+    @StateObject private var viewModel = ProfileViewModel()
 
     var body: some View {
         VStack(spacing: 20) {
@@ -24,33 +25,19 @@ struct ProfileView: View {
 
             // Profile Picture and Info
             VStack(spacing: 8) {
-                AsyncImage(url: URL(string: UserSession.shared.user?.profile_image ?? "")) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                            .frame(width: 90, height: 90)
-                            .clipShape(Circle())
 
-                    case .success(let image):
+                WebImage(url: URL(string: UserSession.shared.user?.profile_image ?? "")) { image in
                         image.resizable()
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 90, height: 90)
-                            .clipShape(Circle())
-
-                    case .failure:
-                        Image(.product) // fallback if failed
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 90, height: 90)
-                            .clipShape(Circle())
-
-                    @unknown default:
-                        EmptyView()
+                    } placeholder: {
+                            Rectangle().foregroundColor(.lightgraybg)
                     }
-                }
-                .frame(width: 90, height: 90)
-                .clipShape(Circle())
+                    .onSuccess { image, data, cacheType in  }
+                    .indicator(.activity)
+                    .transition(.fade(duration: 0.5))
+                    .scaledToFit()
+                    .frame(width: 90, height: 90, alignment: .center)
+                    .clipShape(Circle())
+
 
                 Text(UserSession.shared.user?.name ?? "")
                     .customFont(style: .black, size: .h24)
@@ -66,11 +53,11 @@ struct ProfileView: View {
             VStack(alignment: .leading, spacing: 18) {
                 ProfileRow(icon: "square.and.pencil", title: "Edit Profile")
                     .onTapGesture {
-                        print("edit")
+                        path.push(screen: .editProfile)
                     }
                 ProfileRow(icon: "gear", title: "Quiz Settings")
                     .onTapGesture {
-                        print("edit")
+                        path.push(screen: .chooseSubject(settings: true))
                     }
                 ProfileRow(icon: "trash", title: "Delete Account")
                     .onTapGesture {
@@ -78,19 +65,19 @@ struct ProfileView: View {
                     }
                 ProfileRow(icon: "envelope", title: "Contact us")
                     .onTapGesture {
-                        print("cont")
+                        openURL(Constants.contact_us)
                     }
                 ProfileRow(icon: "questionmark.circle", title: "FAQ")
                     .onTapGesture {
-                        print("faq")
+                        path.push(screen: .faq)
                     }
                 ProfileRow(icon: "lock.doc", title: "Privacy Policy")
                     .onTapGesture {
-                        print("priv pol")
+                        openURL(Constants.privacy_policy)
                     }
                 ProfileRow(icon: "doc.text", title: "Terms & Conditions")
                     .onTapGesture {
-                        print("t&c")
+                        openURL(Constants.terms_conditions)
                     }
             }
             .padding(.horizontal)
@@ -129,6 +116,13 @@ struct ProfileView: View {
         .popup(isPresented: $showDelete) {
             DeleteConfirmationView(isPresented: $showDelete) {
                 print("delete account ")
+                Task {
+                    await viewModel.deleteAccount()
+                    if viewModel.accountDeleted {
+                        UserSession.shared.clear()
+                        path.popToRoot(index: 0)
+                    }
+                }
             }
         } customize: {
             $0
@@ -136,6 +130,12 @@ struct ProfileView: View {
                 .position(.bottom)
                 .closeOnTap(false)
                 .backgroundColor(.black.opacity(0.4))
+        }
+    }
+
+    private func openURL(_ urlString: String) {
+        if let url = URL(string: urlString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
 }

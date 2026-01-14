@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-
-import SwiftUI
+import SDWebImageSwiftUI
 
 struct BusinessListView: View {
     @Binding var path: NavigationPath
@@ -58,6 +57,20 @@ struct BusinessListView: View {
                 Text("Redeemable Coins")
                     .font(.headline)
                 Spacer()
+                Button(action: {
+                    path.push(screen: .favourite)
+                }) {
+                    Image(systemName: "heart.fill")
+                        .resizable()
+                        .frame(width: 18,height: 18)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.black)
+
+                }
+                .frame(width: 50, height: 50)
+                .cornerRadius(25)
+                .clipped()
             }
             .padding(.horizontal)
 
@@ -66,29 +79,18 @@ struct BusinessListView: View {
                 VStack(spacing: 12) {
                     ForEach(filteredBusinesses) { business in
                         HStack {
-                            AsyncImage(url: URL(string: business.profileImage ?? "")) { phase in
-                                switch phase {
-                                case .empty:
-                                    ProgressView() // placeholder while loading
-                                        .frame(width: 55, height: 55)
-
-                                case .success(let image):
+                            WebImage(url: URL(string: business.profileImage ?? "")) { image in
                                     image.resizable()
-                                        .scaledToFill()
-                                        .frame(width: 55, height: 55)
-                                        .clipShape(Circle())
-
-                                case .failure:
-                                    Image(.product) // fallback if failed
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 55, height: 55)
-                                        .clipShape(Circle())
-
-                                @unknown default:
-                                    EmptyView()
+                                } placeholder: {
+                                        Rectangle().foregroundColor(.lightgraybg)
                                 }
-                            }
+                                .onSuccess { image, data, cacheType in  }
+                                .indicator(.activity)
+                                .transition(.fade(duration: 0.5))
+                                .scaledToFill()
+                                .frame(width: 55, height: 55, alignment: .center)
+                                .clipShape(Circle())
+
 
 
                             VStack(alignment: .leading, spacing: 4) {

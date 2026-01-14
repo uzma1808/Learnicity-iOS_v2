@@ -20,6 +20,7 @@ extension ChooseSubjectView {
         @Published var selectedSubject : QuizSubject?
         @Published var selectedDificultyLevel : QuizDifficulty?
 
+
         // MARK: - API Call
         func fetchSubjects() async {
             isLoading = true

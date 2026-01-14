@@ -16,14 +16,14 @@ extension SplashView {
             LoginView(path: $path)
         case .signupView:
             SignupView(path: $path)
-        case .otpView(let email):
-            OTPView(path: $path, email: email)
+        case .otpView(let vm):
+            OTPView(path: $path, viewModel: vm)
         case .forgetPassword:
             ForgotPasswordView(path: $path)
         case .onboardingWelcome:
             OnboardingWelcomeView(path: $path)
-        case .chooseSubject:
-            ChooseSubjectView(path: $path)
+        case .chooseSubject(let settings ):
+            ChooseSubjectView(path: $path,isFromSetting: settings)
         case .home:
             HomeView(path: $path)
         case .streak:
@@ -44,7 +44,14 @@ extension SplashView {
             RedeemFailedView(path: $path)
         case .profileView:
             ProfileView(path: $path)
-
+        case .favourite:
+            FavouriteBusinessListView(path: $path)
+        case .editProfile:
+            EditProfileView(path: $path)
+        case .faq:
+            FAQView(path: $path)
+        case .resetPassword(let vm):
+            ResetPasswordView(path: $path, viewModel: vm)
         }
     }
 }

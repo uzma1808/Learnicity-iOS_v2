@@ -10,6 +10,8 @@ import PopupView
 
 struct ChooseSubjectView: View {
     @Binding var path: NavigationPath
+    var isFromSetting : Bool = false
+    @State private var showToast: Bool = false
     @StateObject private var viewModel = SubjectViewModel()
 
     var body: some View {
@@ -77,12 +79,16 @@ struct ChooseSubjectView: View {
             }
             CustomButtonView(title: "Confirm", action: {
                 if viewModel.validateSubjectSelection() {
-                    //
                     Task {
                         let resp = try await viewModel.setQuizSettings()
                         if resp.status ?? false {
                             UserSession.shared.saveQuizSettings(subject: viewModel.selectedSubject, difficulty: viewModel.selectedDificultyLevel)
-                            path.push(screen: .home)
+                            if isFromSetting {
+                                self.showToast = true
+                            } else {
+                                path.push(screen: .home)
+                            }
+
                         } else {
                             viewModel.errorMessage = "Something went wrong. Please try again."
                             viewModel.showError = true
@@ -96,12 +102,21 @@ struct ChooseSubjectView: View {
             .padding(.bottom)
 
         }
+        .toast($showToast, "Quiz settings updated!")
         .padding()
         .background(Color.white.ignoresSafeArea())
         .navigationBarBackButtonHidden()
         .onAppear {
             Task {
                 await viewModel.fetchSubjects()
+            }
+
+            if let subject = UserSession.shared.selectedSubject {
+                viewModel.selectedSubject = subject
+            }
+
+            if let dificultyLevel = UserSession.shared.selectedDifficulty {
+                viewModel.selectedDificultyLevel = dificultyLevel
             }
         }
         .popup(isPresented: $viewModel.showError) {

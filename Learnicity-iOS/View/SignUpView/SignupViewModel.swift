@@ -20,6 +20,7 @@ extension SignupView {
         @Published var isLoading: Bool = false
         @Published var errorMessage: String?
         @Published var showError: Bool = false
+        @Published var signupSuccess: Bool = false
 
         // Call Signup API
         @MainActor
@@ -38,7 +39,7 @@ extension SignupView {
 
                 if let status = response.status, status == true {
                     // Save user session
-                    UserSession.shared.saveLogin(response: response.toLoginResponse())
+                    signupSuccess = true
                     print("Signup successful, user: \(UserSession.shared.user?.name ?? "")")
                 } else {
                     errorMessage = response.message ?? "Signup failed. Please try again."
@@ -57,7 +58,7 @@ extension SignupView {
         // Validation before calling API
         func validate() -> Bool {
             showError = false
-            if name.isEmpty && age.isEmpty && gender.isEmpty && email.isEmpty && password.isEmpty && confirmPassword.isEmpty {
+            if name.isEmpty /*&& age.isEmpty && gender.isEmpty */&& email.isEmpty && password.isEmpty && confirmPassword.isEmpty {
                 errorMessage = "Please fill all fields!"
                 return false
             }
@@ -66,15 +67,15 @@ extension SignupView {
                 return false
             }
 
-            if age.trimmingCharacters(in: .whitespaces).isEmpty {
-                errorMessage = "Please enter your age."
-                return false
-            }
-
-            if gender.isEmpty {
-                errorMessage = "Please select your gender."
-                return false
-            }
+//            if age.trimmingCharacters(in: .whitespaces).isEmpty {
+//                errorMessage = "Please enter your age."
+//                return false
+//            }
+//
+//            if gender.isEmpty {
+//                errorMessage = "Please select your gender."
+//                return false
+//            }
 
             if email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 errorMessage = "Please enter your email."

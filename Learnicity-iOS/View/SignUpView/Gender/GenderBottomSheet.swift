@@ -16,8 +16,7 @@ struct GenderBottomSheet: View {
     let options = [
         "Male",
         "Female",
-        "I’m non binary",
-        "I prefer not to say"
+        "Non-Binary"
     ]
 
     var body: some View {

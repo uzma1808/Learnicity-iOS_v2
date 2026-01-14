@@ -7,15 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA0082312EB0E8E200781DC3 /* ForgotPasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0082302EB0E8E200781DC3 /* ForgotPasswordResponse.swift */; };
+		FA0082332EB13E6A00781DC3 /* RedeemProductResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0082322EB13E6A00781DC3 /* RedeemProductResponse.swift */; };
+		FA0082352EB13E7800781DC3 /* RedeemProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0082342EB13E7800781DC3 /* RedeemProductViewModel.swift */; };
+		FA163F9E2E91B54000AF7F82 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA163F9D2E91B53800AF7F82 /* ImagePicker.swift */; };
+		FA163FA02E91B73700AF7F82 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA163F9F2E91B72D00AF7F82 /* Constants.swift */; };
+		FA163FA32E91BA8D00AF7F82 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA163FA22E91BA8D00AF7F82 /* FAQView.swift */; };
+		FA163FA52E91C05100AF7F82 /* FAQViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA163FA42E91C04700AF7F82 /* FAQViewModel.swift */; };
 		FA169B4C2E886549003606EB /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA169B4B2E886541003606EB /* QRScannerView.swift */; };
 		FA169B4E2E886568003606EB /* ScanScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA169B4D2E886568003606EB /* ScanScreen.swift */; };
 		FA169B502E88736C003606EB /* RedeemSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA169B4F2E88736C003606EB /* RedeemSuccessView.swift */; };
 		FA169B522E887DB8003606EB /* RedeemFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA169B512E887DB8003606EB /* RedeemFailedView.swift */; };
 		FA169B542E888573003606EB /* QuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA169B532E88856B003606EB /* QuizModel.swift */; };
 		FA169B562E8886E0003606EB /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA169B552E8886E0003606EB /* QuizView.swift */; };
+		FA182E6C2E919F28001AB67E /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA182E6B2E919F28001AB67E /* EditProfileView.swift */; };
+		FA182E6E2E91A03D001AB67E /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA182E6D2E91A02D001AB67E /* EditProfileViewModel.swift */; };
+		FA2CDC922E8F028D00786B91 /* FavouriteBusinessListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2CDC912E8F028C00786B91 /* FavouriteBusinessListView.swift */; };
 		FA5AC3292E8DB1350002C581 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AC3282E8DB1350002C581 /* ProfileView.swift */; };
 		FA5AC32B2E8DBEA20002C581 /* SignoutConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AC32A2E8DBEA10002C581 /* SignoutConfirmationView.swift */; };
 		FA5AC32D2E8DC1B00002C581 /* DeleteConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AC32C2E8DC1B00002C581 /* DeleteConfirmationView.swift */; };
+		FA5F7B412EA00D2F00EF155E /* streak.json in Resources */ = {isa = PBXBuildFile; fileRef = FA5F7B402EA00D2F00EF155E /* streak.json */; };
+		FA5F7B432EA00D4F00EF155E /* coin.json in Resources */ = {isa = PBXBuildFile; fileRef = FA5F7B422EA00D4F00EF155E /* coin.json */; };
 		FA7297EF2E73476F008C5B3B /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7297EE2E734768008C5B3B /* Endpoints.swift */; };
 		FA79CB042E3D389900CF57D0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA79CAF12E3D389900CF57D0 /* Preview Assets.xcassets */; };
 		FA79CB052E3D389900CF57D0 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA79CAF32E3D389900CF57D0 /* Roboto-Black.ttf */; };
@@ -36,6 +48,7 @@
 		FA79CB1D2E3D3CC600CF57D0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA79CB1C2E3D3CC600CF57D0 /* LoginView.swift */; };
 		FA79CB202E3D3D1100CF57D0 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA79CB1F2E3D3D1100CF57D0 /* Route.swift */; };
 		FA79CB222E3D3D7200CF57D0 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA79CB212E3D3D7200CF57D0 /* UINavigationController.swift */; };
+		FA8D89232E9BD526003916D9 /* LeaderboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8D89222E9BD517003916D9 /* LeaderboardModel.swift */; };
 		FA95E4182E4128E8001B38F2 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = FA95E4172E4128E8001B38F2 /* PopupView */; };
 		FA9ADADB2E7830C000FEBDCD /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9ADADA2E7830C000FEBDCD /* ErrorView.swift */; };
 		FA9ADADD2E78315500FEBDCD /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9ADADC2E78315500FEBDCD /* SuccessView.swift */; };
@@ -69,6 +82,13 @@
 		FAC2EEC32E4FBEAA005A51E8 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC2EEC22E4FBEAA005A51E8 /* ForgotPasswordView.swift */; };
 		FAC2EEC62E4FC79B005A51E8 /* OnboardingWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC2EEC52E4FC79B005A51E8 /* OnboardingWelcomeView.swift */; };
 		FAC2EEC92E4FC934005A51E8 /* ChooseSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC2EEC82E4FC934005A51E8 /* ChooseSubjectView.swift */; };
+		FAC3088D2E9D79B900C82950 /* KeyboardHeightAdaptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3088C2E9D79B900C82950 /* KeyboardHeightAdaptable.swift */; };
+		FAC3088F2E9D85FF00C82950 /* LeaderboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3088E2E9D85FF00C82950 /* LeaderboardViewModel.swift */; };
+		FAC308922E9D8DC800C82950 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAC308912E9D8DC800C82950 /* SDWebImageSwiftUI */; };
+		FAC308952E9D912200C82950 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FAC308942E9D912200C82950 /* Lottie */; };
+		FAC308972E9D93F600C82950 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC308962E9D93F600C82950 /* ProfileViewModel.swift */; };
+		FAC308992E9D97EE00C82950 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC308982E9D97EE00C82950 /* LottieView.swift */; };
+		FAC3089B2E9D994500C82950 /* confettie.json in Resources */ = {isa = PBXBuildFile; fileRef = FAC3089A2E9D994500C82950 /* confettie.json */; };
 		FAC425D62E5E34FD00875F80 /* BusinessListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC425D52E5E34FD00875F80 /* BusinessListView.swift */; };
 		FAC425D92E5E401300875F80 /* BusinessMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC425D82E5E401300875F80 /* BusinessMapView.swift */; };
 		FAC425DD2E5E422F00875F80 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = FAC425DC2E5E422F00875F80 /* GoogleMaps */; };
@@ -81,6 +101,8 @@
 		FAD9BA612E509FE500541219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD9BA602E509FE500541219 /* HomeView.swift */; };
 		FAD9BA642E50A8A700541219 /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD9BA632E50A8A700541219 /* StreakView.swift */; };
 		FAD9BA672E5106AF00541219 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD9BA662E5106AF00541219 /* LeaderboardView.swift */; };
+		FAFCBA242EA6C29300AF283C /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFCBA232EA6C28100AF283C /* ForgotPasswordViewModel.swift */; };
+		FAFCBA262EA6C31300AF283C /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFCBA252EA6C31300AF283C /* ResetPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,15 +123,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA0082302EB0E8E200781DC3 /* ForgotPasswordResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordResponse.swift; sourceTree = "<group>"; };
+		FA0082322EB13E6A00781DC3 /* RedeemProductResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemProductResponse.swift; sourceTree = "<group>"; };
+		FA0082342EB13E7800781DC3 /* RedeemProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemProductViewModel.swift; sourceTree = "<group>"; };
+		FA163F9D2E91B53800AF7F82 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		FA163F9F2E91B72D00AF7F82 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FA163FA22E91BA8D00AF7F82 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
+		FA163FA42E91C04700AF7F82 /* FAQViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQViewModel.swift; sourceTree = "<group>"; };
 		FA169B4B2E886541003606EB /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 		FA169B4D2E886568003606EB /* ScanScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanScreen.swift; sourceTree = "<group>"; };
 		FA169B4F2E88736C003606EB /* RedeemSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemSuccessView.swift; sourceTree = "<group>"; };
 		FA169B512E887DB8003606EB /* RedeemFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemFailedView.swift; sourceTree = "<group>"; };
 		FA169B532E88856B003606EB /* QuizModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModel.swift; sourceTree = "<group>"; };
 		FA169B552E8886E0003606EB /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		FA182E6B2E919F28001AB67E /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		FA182E6D2E91A02D001AB67E /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		FA2CDC912E8F028C00786B91 /* FavouriteBusinessListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteBusinessListView.swift; sourceTree = "<group>"; };
 		FA5AC3282E8DB1350002C581 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		FA5AC32A2E8DBEA10002C581 /* SignoutConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutConfirmationView.swift; sourceTree = "<group>"; };
 		FA5AC32C2E8DC1B00002C581 /* DeleteConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmationView.swift; sourceTree = "<group>"; };
+		FA5F7B402EA00D2F00EF155E /* streak.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = streak.json; sourceTree = "<group>"; };
+		FA5F7B422EA00D4F00EF155E /* coin.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = coin.json; sourceTree = "<group>"; };
 		FA7297EE2E734768008C5B3B /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		FA79CAAB2E3D30DC00CF57D0 /* Learnicity-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Learnicity-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA79CABB2E3D30DF00CF57D0 /* Learnicity-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Learnicity-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +168,7 @@
 		FA79CB1C2E3D3CC600CF57D0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FA79CB1F2E3D3D1100CF57D0 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		FA79CB212E3D3D7200CF57D0 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		FA8D89222E9BD517003916D9 /* LeaderboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardModel.swift; sourceTree = "<group>"; };
 		FA9ADADA2E7830C000FEBDCD /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		FA9ADADC2E78315500FEBDCD /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
 		FA9ADADF2E7839AD00FEBDCD /* Usersession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usersession.swift; sourceTree = "<group>"; };
@@ -162,6 +197,11 @@
 		FAC2EEC22E4FBEAA005A51E8 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		FAC2EEC52E4FC79B005A51E8 /* OnboardingWelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeView.swift; sourceTree = "<group>"; };
 		FAC2EEC82E4FC934005A51E8 /* ChooseSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSubjectView.swift; sourceTree = "<group>"; };
+		FAC3088C2E9D79B900C82950 /* KeyboardHeightAdaptable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHeightAdaptable.swift; sourceTree = "<group>"; };
+		FAC3088E2E9D85FF00C82950 /* LeaderboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewModel.swift; sourceTree = "<group>"; };
+		FAC308962E9D93F600C82950 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		FAC308982E9D97EE00C82950 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		FAC3089A2E9D994500C82950 /* confettie.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = confettie.json; sourceTree = "<group>"; };
 		FAC425D52E5E34FD00875F80 /* BusinessListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessListView.swift; sourceTree = "<group>"; };
 		FAC425D82E5E401300875F80 /* BusinessMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessMapView.swift; sourceTree = "<group>"; };
 		FAC425DE2E5E42F000875F80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +213,8 @@
 		FAD9BA602E509FE500541219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FAD9BA632E50A8A700541219 /* StreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
 		FAD9BA662E5106AF00541219 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		FAFCBA232EA6C28100AF283C /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		FAFCBA252EA6C31300AF283C /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -193,12 +235,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC308922E9D8DC800C82950 /* SDWebImageSwiftUI in Frameworks */,
 				FA95E4182E4128E8001B38F2 /* PopupView in Frameworks */,
 				FAC2EEAC2E4E04B4005A51E8 /* KeyboardManager-SwiftUI in Frameworks */,
 				FA9ADAE42E7889FB00FEBDCD /* ActivityIndicatorView in Frameworks */,
 				FA9ADAF82E7AE04300FEBDCD /* GooglePlaces in Frameworks */,
 				FAC425DD2E5E422F00875F80 /* GoogleMaps in Frameworks */,
 				FA9ADAFA2E7AE04300FEBDCD /* GooglePlacesSwift in Frameworks */,
+				FAC308952E9D912200C82950 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,15 +263,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA163FA12E91BA7400AF7F82 /* FAQView */ = {
+			isa = PBXGroup;
+			children = (
+				FA163FA22E91BA8D00AF7F82 /* FAQView.swift */,
+				FA163FA42E91C04700AF7F82 /* FAQViewModel.swift */,
+			);
+			path = FAQView;
+			sourceTree = "<group>";
+		};
 		FA169B4A2E886535003606EB /* QRScanner */ = {
 			isa = PBXGroup;
 			children = (
 				FA169B4B2E886541003606EB /* QRScannerView.swift */,
 				FA169B4D2E886568003606EB /* ScanScreen.swift */,
 				FA169B4F2E88736C003606EB /* RedeemSuccessView.swift */,
+				FA0082322EB13E6A00781DC3 /* RedeemProductResponse.swift */,
+				FA0082342EB13E7800781DC3 /* RedeemProductViewModel.swift */,
 				FA169B512E887DB8003606EB /* RedeemFailedView.swift */,
 			);
 			path = QRScanner;
+			sourceTree = "<group>";
+		};
+		FA182E6A2E919EB7001AB67E /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				FA182E6B2E919F28001AB67E /* EditProfileView.swift */,
+				FA163F9D2E91B53800AF7F82 /* ImagePicker.swift */,
+				FA182E6D2E91A02D001AB67E /* EditProfileViewModel.swift */,
+			);
+			path = EditProfile;
 			sourceTree = "<group>";
 		};
 		FA5AC3272E8DB11B0002C581 /* ProfileView */ = {
@@ -236,6 +301,7 @@
 				FA5AC3282E8DB1350002C581 /* ProfileView.swift */,
 				FA5AC32A2E8DBEA10002C581 /* SignoutConfirmationView.swift */,
 				FA5AC32C2E8DC1B00002C581 /* DeleteConfirmationView.swift */,
+				FAC308962E9D93F600C82950 /* ProfileViewModel.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -295,6 +361,9 @@
 		FA79CAFE2E3D389900CF57D0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FAC308982E9D97EE00C82950 /* LottieView.swift */,
+				FAC3088C2E9D79B900C82950 /* KeyboardHeightAdaptable.swift */,
+				FA163F9F2E91B72D00AF7F82 /* Constants.swift */,
 				FA9ADAFB2E7AF70700FEBDCD /* LocationManager */,
 				FA9ADADE2E78399D00FEBDCD /* Usersession */,
 				FA9ADAD92E78309F00FEBDCD /* ErrorView */,
@@ -314,6 +383,9 @@
 		FA79CB032E3D389900CF57D0 /* Learnicity-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				FAC3089A2E9D994500C82950 /* confettie.json */,
+				FA5F7B422EA00D4F00EF155E /* coin.json */,
+				FA5F7B402EA00D2F00EF155E /* streak.json */,
 				FA79CB172E3D3A6300CF57D0 /* View */,
 				FA79CB122E3D38B200CF57D0 /* Assets */,
 				FA79CAFE2E3D389900CF57D0 /* Utilities */,
@@ -338,6 +410,8 @@
 		FA79CB172E3D3A6300CF57D0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FA163FA12E91BA7400AF7F82 /* FAQView */,
+				FA182E6A2E919EB7001AB67E /* EditProfile */,
 				FA5AC3272E8DB11B0002C581 /* ProfileView */,
 				FA169B4A2E886535003606EB /* QRScanner */,
 				FA9ADB002E7B06ED00FEBDCD /* BusinessDetailsView */,
@@ -457,6 +531,9 @@
 			isa = PBXGroup;
 			children = (
 				FAC2EEC22E4FBEAA005A51E8 /* ForgotPasswordView.swift */,
+				FAFCBA252EA6C31300AF283C /* ResetPasswordView.swift */,
+				FAFCBA232EA6C28100AF283C /* ForgotPasswordViewModel.swift */,
+				FA0082302EB0E8E200781DC3 /* ForgotPasswordResponse.swift */,
 			);
 			path = ForgotPassword;
 			sourceTree = "<group>";
@@ -483,6 +560,7 @@
 			isa = PBXGroup;
 			children = (
 				FAC425D52E5E34FD00875F80 /* BusinessListView.swift */,
+				FA2CDC912E8F028C00786B91 /* FavouriteBusinessListView.swift */,
 				FA9ADAF42E79F9E900FEBDCD /* BusinessViewModel.swift */,
 				FA9ADAF22E79F7CF00FEBDCD /* BusinessModel.swift */,
 			);
@@ -567,6 +645,8 @@
 			isa = PBXGroup;
 			children = (
 				FAD9BA662E5106AF00541219 /* LeaderboardView.swift */,
+				FA8D89222E9BD517003916D9 /* LeaderboardModel.swift */,
+				FAC3088E2E9D85FF00C82950 /* LeaderboardViewModel.swift */,
 			);
 			path = Leaderboard;
 			sourceTree = "<group>";
@@ -594,6 +674,8 @@
 				FA9ADAE32E7889FB00FEBDCD /* ActivityIndicatorView */,
 				FA9ADAF72E7AE04300FEBDCD /* GooglePlaces */,
 				FA9ADAF92E7AE04300FEBDCD /* GooglePlacesSwift */,
+				FAC308912E9D8DC800C82950 /* SDWebImageSwiftUI */,
+				FAC308942E9D912200C82950 /* Lottie */,
 			);
 			productName = "Learnicity-iOS";
 			productReference = FA79CAAB2E3D30DC00CF57D0 /* Learnicity-iOS.app */;
@@ -683,6 +765,8 @@
 				FAC425DB2E5E422F00875F80 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				FA9ADAE22E7889FB00FEBDCD /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				FA9ADAF62E7AE04300FEBDCD /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
+				FAC308902E9D8DC800C82950 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				FAC308932E9D912200C82950 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FA79CAAC2E3D30DC00CF57D0 /* Products */;
@@ -703,7 +787,10 @@
 			files = (
 				FA79CB042E3D389900CF57D0 /* Preview Assets.xcassets in Resources */,
 				FA79CB052E3D389900CF57D0 /* Roboto-Black.ttf in Resources */,
+				FA5F7B432EA00D4F00EF155E /* coin.json in Resources */,
 				FA79CB062E3D389900CF57D0 /* Roboto-Bold.ttf in Resources */,
+				FA5F7B412EA00D2F00EF155E /* streak.json in Resources */,
+				FAC3089B2E9D994500C82950 /* confettie.json in Resources */,
 				FA79CB072E3D389900CF57D0 /* Roboto-ExtraBold.ttf in Resources */,
 				FA79CB082E3D389900CF57D0 /* Roboto-ExtraLight.ttf in Resources */,
 				FA79CB092E3D389900CF57D0 /* Roboto-Light.ttf in Resources */,
@@ -751,8 +838,10 @@
 				FA9ADADD2E78315500FEBDCD /* SuccessView.swift in Sources */,
 				FAC2EEAE2E4E061E005A51E8 /* View + Extension.swift in Sources */,
 				FAC2EEB32E4FA811005A51E8 /* LoginViewModel.swift in Sources */,
+				FA182E6C2E919F28001AB67E /* EditProfileView.swift in Sources */,
 				FAC2EEC92E4FC934005A51E8 /* ChooseSubjectView.swift in Sources */,
 				FA79CB142E3D390800CF57D0 /* Fonts.swift in Sources */,
+				FAFCBA262EA6C31300AF283C /* ResetPasswordView.swift in Sources */,
 				FA169B4E2E886568003606EB /* ScanScreen.swift in Sources */,
 				FA79CB112E3D389900CF57D0 /* SplashView.swift in Sources */,
 				FACCBEE82E3E81FA00CDA26C /* CustomButtonView.swift in Sources */,
@@ -764,33 +853,48 @@
 				FA9ADAEF2E78A6C900FEBDCD /* QuizSettings.swift in Sources */,
 				FA5AC32D2E8DC1B00002C581 /* DeleteConfirmationView.swift in Sources */,
 				FA169B4C2E886549003606EB /* QRScannerView.swift in Sources */,
+				FAC3088F2E9D85FF00C82950 /* LeaderboardViewModel.swift in Sources */,
 				FA9ADADB2E7830C000FEBDCD /* ErrorView.swift in Sources */,
 				FA79CB202E3D3D1100CF57D0 /* Route.swift in Sources */,
 				FA5AC3292E8DB1350002C581 /* ProfileView.swift in Sources */,
+				FA163FA32E91BA8D00AF7F82 /* FAQView.swift in Sources */,
 				FAD9BA642E50A8A700541219 /* StreakView.swift in Sources */,
 				FA169B522E887DB8003606EB /* RedeemFailedView.swift in Sources */,
+				FAC308992E9D97EE00C82950 /* LottieView.swift in Sources */,
 				FA9ADAED2E78A2C600FEBDCD /* HomeViewModel.swift in Sources */,
 				FA9ADAF12E78A79100FEBDCD /* SubjectViewModel.swift in Sources */,
 				FAC2EEC62E4FC79B005A51E8 /* OnboardingWelcomeView.swift in Sources */,
 				FA5AC32B2E8DBEA20002C581 /* SignoutConfirmationView.swift in Sources */,
 				FAC2EEC32E4FBEAA005A51E8 /* ForgotPasswordView.swift in Sources */,
 				FAC425DF2E5E42F000875F80 /* AppDelegate.swift in Sources */,
+				FAFCBA242EA6C29300AF283C /* ForgotPasswordViewModel.swift in Sources */,
 				FA9ADAF32E79F7D900FEBDCD /* BusinessModel.swift in Sources */,
 				FAC2EEBD2E4FB3D8005A51E8 /* Validator.swift in Sources */,
 				FA9ADAE92E788DAA00FEBDCD /* SignupModel.swift in Sources */,
+				FA163FA02E91B73700AF7F82 /* Constants.swift in Sources */,
+				FA0082332EB13E6A00781DC3 /* RedeemProductResponse.swift in Sources */,
 				FA9ADAEB2E789F9B00FEBDCD /* HomeModel.swift in Sources */,
 				FACCBEED2E3E879900CDA26C /* CustomTextfieldView.swift in Sources */,
+				FA2CDC922E8F028D00786B91 /* FavouriteBusinessListView.swift in Sources */,
 				FAC2EEC02E4FB737005A51E8 /* OTPView.swift in Sources */,
 				FA9ADAE02E7839AD00FEBDCD /* Usersession.swift in Sources */,
+				FAC3088D2E9D79B900C82950 /* KeyboardHeightAdaptable.swift in Sources */,
 				FAC2EEB72E4FB138005A51E8 /* LoginModel.swift in Sources */,
+				FA182E6E2E91A03D001AB67E /* EditProfileViewModel.swift in Sources */,
 				FA79CB1D2E3D3CC600CF57D0 /* LoginView.swift in Sources */,
+				FA0082352EB13E7800781DC3 /* RedeemProductViewModel.swift in Sources */,
 				FAD9BA672E5106AF00541219 /* LeaderboardView.swift in Sources */,
+				FAC308972E9D93F600C82950 /* ProfileViewModel.swift in Sources */,
 				FA79CB1A2E3D3C2900CF57D0 /* RootNavigation.swift in Sources */,
 				FAC425D62E5E34FD00875F80 /* BusinessListView.swift in Sources */,
+				FA8D89232E9BD526003916D9 /* LeaderboardModel.swift in Sources */,
 				FA169B502E88736C003606EB /* RedeemSuccessView.swift in Sources */,
 				FA9ADAE72E788C7800FEBDCD /* SignupViewModel.swift in Sources */,
 				FAC2EEA72E4DFB13005A51E8 /* AgeBottomSheet.swift in Sources */,
 				FA9ADB042E7B0F1E00FEBDCD /* BusinessDetailViewModel.swift in Sources */,
+				FA163F9E2E91B54000AF7F82 /* ImagePicker.swift in Sources */,
+				FA0082312EB0E8E200781DC3 /* ForgotPasswordResponse.swift in Sources */,
+				FA163FA52E91C05100AF7F82 /* FAQViewModel.swift in Sources */,
 				FAC2EEBB2E4FB190005A51E8 /* ApiService.swift in Sources */,
 				FA79CB222E3D3D7200CF57D0 /* UINavigationController.swift in Sources */,
 			);
@@ -951,27 +1055,35 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Learnicity-iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 9672UC6565;
+				DEVELOPMENT_TEAM = 6MA54R3X44;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Learnicity-iOS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Learnicity;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is needed to scann QR code.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is used to show nearby businesses on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Learnicity-iOS";
+				MARKETING_VERSION = 1.1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.learnicity.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -981,27 +1093,35 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Learnicity-iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 9672UC6565;
+				DEVELOPMENT_TEAM = 6MA54R3X44;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Learnicity-iOS/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Learnicity;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is needed to scann QR code.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is used to show nearby businesses on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Learnicity-iOS";
+				MARKETING_VERSION = 1.1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.learnicity.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1147,6 +1267,22 @@
 				kind = branch;
 			};
 		};
+		FAC308902E9D8DC800C82950 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
+		FAC308932E9D912200C82950 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
 		FAC425DB2E5E422F00875F80 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
@@ -1182,6 +1318,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FAC2EEAA2E4E04B4005A51E8 /* XCRemoteSwiftPackageReference "KeyboardManager-SwiftUI" */;
 			productName = "KeyboardManager-SwiftUI";
+		};
+		FAC308912E9D8DC800C82950 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAC308902E9D8DC800C82950 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		FAC308942E9D912200C82950 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAC308932E9D912200C82950 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 		FAC425DC2E5E422F00875F80 /* GoogleMaps */ = {
 			isa = XCSwiftPackageProductDependency;

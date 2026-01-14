@@ -11,6 +11,7 @@ struct QuizView: View {
     @ObservedObject var vm = HomeView.HomeViewModel()
     @State private var showNext = false
     private let optionColors: [Color] = [.red, .blue, .green, .yellow]
+    @State private var showConfetti = false
 
     var body: some View {
         if vm.startQuiz {
@@ -26,7 +27,7 @@ struct QuizView: View {
                         VStack(spacing: 16) {
                             Spacer()
                             Text(tf.question ?? "")
-                                .customFont(style: .medium, size: .h26)
+                                .customFont(style: .bold, size: .h28)
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal)
 
@@ -75,45 +76,61 @@ struct QuizView: View {
                             Spacer()
                         }
                     } else {
-                        VStack(spacing: 20) {
-                            Spacer()
-                            if let coins = vm.coinsEarned {
-                                if vm.coinsEarned == 0 {
-                                    VStack {
-                                        Image(.fail)
-                                            .resizable()
-                                            .frame(width: 150, height: 150)
-                                        Text("You have failed quiz!\nYou earned \(coins) coins")
-                                            .customFont(style: .bold, size: .h30)
-                                    }
-                                } else {
-                                    VStack {
-                                        Image(.reward)
-                                            .resizable()
-                                            .frame(width: 150, height: 150)
-                                        Text("Congratulations!\nYou earned \(coins) coins")
-                                            .customFont(style: .bold, size: .h30)
-                                    }
-                                }
-                                CustomButtonView(title: "Take Another Quiz") {
-                                    vm.currentIndex = 0
-                                    vm.selectedTrueFalse = nil
-                                    vm.selectedMCQs.removeAll()
-                                    vm.mcqQuizzes.removeAll()
-                                    vm.trueFalseQuiz = nil
-                                    vm.coinsEarned = nil
-                                    Task {
-                                        await vm.fetchQuiz()
+                        ZStack {
+                                    VStack(spacing: 20) {
+                                        Spacer()
+
+                                        if let coins = vm.coinsEarned {
+                                            if coins == 0 {
+                                                VStack {
+                                                    Image(.fail)
+                                                        .resizable()
+                                                        .frame(width: 150, height: 150)
+                                                    Text("You have failed quiz!\nYou earned \(coins) coins")
+                                                        .customFont(style: .bold, size: .h30)
+                                                        .multilineTextAlignment(.center)
+                                                }
+                                            } else {
+                                                VStack {
+                                                    Image(.reward)
+                                                        .resizable()
+                                                        .frame(width: 150, height: 150)
+                                                    Text("Congratulations!\nYou earned \(coins) coins")
+                                                        .customFont(style: .bold, size: .h30)
+                                                        .multilineTextAlignment(.center)
+                                                }
+                                                .onAppear {
+                                                    showConfetti = true
+                                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                                }
+                                            }
+
+                                            CustomButtonView(title: "Take Another Quiz") {
+                                                vm.resetQuiz()
+                                            }
+                                            .padding(.horizontal, 17)
+                                        }
+
+                                        Spacer()
                                     }
 
+                                    // 🎉 Confetti Overlay
+//                                    if showConfetti {
+//                                        LottieView(name: "confettie", loopMode: .playOnce) {
+//                                            // Hide confetti after animation finishes
+//                                            withAnimation(.easeOut(duration: 0.3)) {
+//                                                showConfetti = false
+//                                            }
+//                                        }
+//                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                                        .background(Color.black.opacity(0.001)) // ensures tap passthrough
+//                                        .ignoresSafeArea()
+//                                        .transition(.opacity)
+//                                        .zIndex(1) // keep above everything
+//                                    }
                                 }
-                                .padding(.horizontal, 17)
-                            }
-                            Spacer()
 
-                        }
                     }
-
                 }
             }
             .padding(.horizontal)
@@ -134,6 +151,7 @@ struct QuizView: View {
             }
             .padding(.top, 30)
         }
+        
     }
 
     // MARK: - Helpers

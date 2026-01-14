@@ -103,13 +103,9 @@ struct SignupView: View {
                 .padding(.horizontal, 28)
                 Spacer()
                 CustomButtonView(title: "Sign up") {
-//                    path.push(screen: .otpView(email: email))
                     if viewModel.validate() {
                           Task {
                               await viewModel.callSignupApi()
-                              if !viewModel.showError {
-                                  path.push(screen: .otpView(email: viewModel.email))
-                              }
                           }
                       } else {
                         viewModel.showError = true
@@ -156,9 +152,7 @@ struct SignupView: View {
                 .closeOnTap(false)
                 .backgroundColor(.black.opacity(0.4))
         }
-        .onTapGesture {
-            hideKeyboard()
-        }
+
         .popup(isPresented: $viewModel.showError) {
             ErrorView(errorMessage: viewModel.errorMessage ?? "" )
         } customize: {
@@ -167,7 +161,18 @@ struct SignupView: View {
                 .autohideIn(1.5)
                 .position(.top)
         }
+        .popup(isPresented: $viewModel.signupSuccess) {
+            SuccessView(successMessage: "You're signed up successfully!")
+                .onDisappear {
+                    path.pop()
+                }
+        } customize: {
+            $0.type(.toast).autohideIn(1.5).position(.top)
+        }
         .loadingIndicator($viewModel.isLoading)
+        .onTapGesture {
+            hideKeyboard()
+        }
 
     }
 }

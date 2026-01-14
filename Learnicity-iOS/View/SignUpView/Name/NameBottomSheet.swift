@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import KeyboardManager_SwiftUI
 
 struct NameBottomSheet: View {
     @Binding var isPresented: Bool
@@ -41,7 +40,10 @@ struct NameBottomSheet: View {
             .frame(maxWidth: .infinity)
             .padding(.bottom, 0)
             .frame(maxHeight: .infinity, alignment: .bottom)
-            .keyboardHeightAdaptable()
+            .keyboardAdaptive()
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
     }
 }

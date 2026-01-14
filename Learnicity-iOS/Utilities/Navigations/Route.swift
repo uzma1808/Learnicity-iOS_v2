@@ -13,10 +13,10 @@ import UIKit
 enum Route: Hashable {
     case loginView
     case signupView
-    case otpView(email: String)
+    case otpView(ForgotPasswordViewModel)
     case forgetPassword
     case onboardingWelcome
-    case chooseSubject
+    case chooseSubject(settings: Bool)
     case home
     case streak
     case leaderboard
@@ -27,6 +27,10 @@ enum Route: Hashable {
     case redeemSuccess(Product)
     case redeemFailed
     case profileView
+    case favourite
+    case editProfile
+    case faq
+    case resetPassword(ForgotPasswordViewModel)
 
 }
 extension NavigationPath {

@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
+import PopupView
 
 struct ForgotPasswordView: View {
 
     @Binding var path: NavigationPath
-    @State private var password: String = ""
-    @State private var confirmPassword: String = ""
+    @StateObject private var viewModel = ForgotPasswordViewModel()
 
     var body: some View {
             VStack(spacing: 24) {
@@ -20,27 +20,26 @@ struct ForgotPasswordView: View {
                     path.pop()
                 })
 
-                Image(.celebration)
+                Image(.animal)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 76, height: 76)
+                    .frame(width: 135, height: 135)
 
-                VStack(spacing: 16) {
-                    // Password
-                    CustomTextfieldView(placeholder: "New Password", text: $password,isSecure: true)
+                    // email
+                CustomTextfieldView(placeholder: "Email", text: $viewModel.email,isSecure: false)
                         .frame(height: 58)
-
-                    // Confirm Password
-                    CustomTextfieldView(placeholder: "Confirm Password", text: $confirmPassword, isSecure: true)
-                        .frame(height: 58)
-                }
-                .padding(.horizontal, 28)
+                        .padding(.horizontal, 28)
 
                 Spacer()
-                CustomButtonView(title: "Change Password") {
-
+                CustomButtonView(title: "Verify") {
+                    Task {
+                        let success = await viewModel.callForgotPasswordAPI()
+                        if success {
+                            path.push(screen: .otpView(viewModel))
+                        }
+                    }
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 17)
                 .padding(.bottom)
             }
             .padding(.top)
@@ -50,6 +49,15 @@ struct ForgotPasswordView: View {
         .onTapGesture {
             hideKeyboard()
         }
+        .popup(isPresented: $viewModel.showError) {
+            ErrorView(errorMessage: viewModel.errorMessage ?? "" )
+        } customize: {
+            $0
+                .type(.toast)
+                .autohideIn(1.5)
+                .position(.top)
+        }
+        .loadingIndicator($viewModel.isLoading)
 
     }
 }

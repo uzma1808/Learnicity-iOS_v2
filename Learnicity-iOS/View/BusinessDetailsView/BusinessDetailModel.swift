@@ -8,7 +8,7 @@
 struct BusinessDetailResponse: Codable {
     let status: Bool?
     let message: String?
-    let data: BusinessDetailData?
+    var data: BusinessDetailData?
 }
 
 struct BusinessDetailData: Codable, Identifiable {
@@ -21,7 +21,7 @@ struct BusinessDetailData: Codable, Identifiable {
     let latitude: String?
     let longitude: String?
     let productsCount: Int?
-    let favourite: Int?
+    var favourite: Int?
     let redeemableCoins: Int?
     let recentRedeemUsers: [String]?
     let products: [Product]?

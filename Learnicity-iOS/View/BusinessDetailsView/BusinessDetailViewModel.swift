@@ -12,6 +12,7 @@ extension BusinessDetailView {
     @MainActor
     class BusinessDetailViewModel: BaseViewModel {
         @Published var businessDetail: BusinessDetailData?
+        @Published var isFavourite: Bool = false
         @Published var isLoading: Bool = false
         @Published var errorMessage: String?
         @Published var showError: Bool = false
@@ -26,6 +27,7 @@ extension BusinessDetailView {
 
                 if let status = response.status, status == true {
                     self.businessDetail = response.data
+                    self.isFavourite = (response.data?.favourite ?? 0) == 0 ? false : true
                 } else {
                     errorMessage = response.message ?? "Failed to load business details."
                     showError = true
@@ -39,5 +41,23 @@ extension BusinessDetailView {
 
             isLoading = false
         }
+
+        // Toggle Favourite
+                func toggleFavourite() async {
+                    guard let businessId = businessDetail?.id else { return }
+                    do {
+                        let response = try await APIService.shared.setFavouriteBusiness(businessId: businessId)
+                        if response.status == true {
+                            // API auto toggles, so just flip our state
+                            self.isFavourite.toggle()
+                            print("✅ \(response.message ?? "")")
+                        } else {
+                            print("⚠️ \(response.message ?? "Failed to update favourite")")
+                        }
+                    } catch {
+                        print("❌ Favourite API failed: \(error.localizedDescription)")
+                    }
+                }
+
     }
 }

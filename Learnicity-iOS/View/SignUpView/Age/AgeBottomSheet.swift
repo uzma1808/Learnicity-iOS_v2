@@ -39,7 +39,10 @@ struct AgeBottomSheet: View {
             .frame(maxWidth: .infinity)
             .padding(.bottom, 0)
             .frame(maxHeight: .infinity, alignment: .bottom)
-            .keyboardHeightAdaptable()
+            .keyboardAdaptive()
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
     }
 }

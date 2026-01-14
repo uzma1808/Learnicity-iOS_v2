@@ -95,5 +95,15 @@ extension HomeView {
                     showError = true
                 }
             }
+
+        func resetQuiz() {
+                currentIndex = 0
+                selectedTrueFalse = nil
+                selectedMCQs.removeAll()
+                mcqQuizzes.removeAll()
+                trueFalseQuiz = nil
+                coinsEarned = nil
+                Task { await fetchQuiz() }
+            }
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-import SwiftUI
+import PopupView
 
 struct OTPView: View {
 
@@ -20,7 +20,7 @@ struct OTPView: View {
     @State private var timeRemaining: Int = 300 // 5 minutes
     @State private var timer: Timer?
 
-    let email: String
+    @ObservedObject var viewModel: ForgotPasswordViewModel
 
     var body: some View {
         VStack(spacing: 24) {
@@ -54,7 +54,7 @@ struct OTPView: View {
                     .customFont(style: .medium, size: .h18)
                     .foregroundColor(.darkfont)
                     .font(.system(size: 14))
-                Text(email)
+                Text(viewModel.email)
                     .customFont(style: .medium, size: .h18)
                     .foregroundColor(.bluefont)
                     .font(.system(size: 14))
@@ -75,6 +75,8 @@ struct OTPView: View {
                         .keyboardType(.numberPad)
                         .focused($focusedIndex, equals: index)
                         .onChange(of: otpFields[index]) { newValue in
+                            viewModel.otp = otpFields.joined()
+                            print("OTP ENTERED", viewModel.otp)
                             if newValue.count == 1 {
                                 if index < 5 { focusedIndex = index + 1 }
                             } else if newValue.isEmpty {
@@ -105,8 +107,11 @@ struct OTPView: View {
             Spacer()
 
             // Login Button
-            CustomButtonView(title: "Login", action: {
-                print("login clicked")
+            CustomButtonView(title: "Verify", action: {
+                if viewModel.verifyOTP() {
+                       path.push(screen: .resetPassword(viewModel))
+                   }
+
             })
             .padding(.horizontal, 17)
             .padding(.bottom)
@@ -120,6 +125,15 @@ struct OTPView: View {
         }
         .navigationBarBackButtonHidden()
         .background(Color.white.ignoresSafeArea())
+        .popup(isPresented: $viewModel.showError) {
+            ErrorView(errorMessage: viewModel.errorMessage ?? "" )
+        } customize: {
+            $0
+                .type(.toast)
+                .autohideIn(1.5)
+                .position(.top)
+        }
+        .loadingIndicator($viewModel.isLoading)
 
     }
 
@@ -147,7 +161,3 @@ struct OTPView: View {
     }
 }
 
-
-#Preview {
-    OTPView(path: .constant(NavigationPath()), email: "john@gmail.com")
-}

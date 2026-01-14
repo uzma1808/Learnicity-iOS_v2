@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct BusinessDetailView: View {
     @StateObject private var viewModel = BusinessDetailViewModel()
@@ -18,46 +19,45 @@ struct BusinessDetailView: View {
 
             // MARK: - Header Image with Back Button
             ZStack(alignment: .topLeading) {
-                AsyncImage(url: URL(string: viewModel.businessDetail?.businessCover ?? "")) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                            .frame(height: 300)
+                WebImage(url: URL(string: viewModel.businessDetail?.businessCover ?? ""))
+                    .resizable()
+                    .scaledToFit()
+                    .clipped() // ✅ Clip to frame
+                    .transition(.fade(duration: 0.5))
 
-                    case .success(let image):
-                        image.resizable()
-                            .resizable()
-                            .scaledToFill()
-                            .frame(height: 300)
-                            .clipped()
+                HStack {
+                    // Back Button
 
-                    case .failure:
-                        Image(.product) // fallback if failed
-                            .resizable()
-                            .scaledToFill()
-                            .frame(height: 300)
-                            .clipped()
+                    Button(action: {
+                        path.pop()
+                    }) {
+                        Image(systemName: "arrow.left")
+                            .foregroundColor(.black)
+                            .padding()
+                            .background(Color.white.opacity(0.8))
+                            .clipShape(Circle())
+                            .shadow(radius: 2)
+                    }
 
-                    @unknown default:
-                        EmptyView()
+                    Spacer()
+
+                    Button(action: {
+                        Task {
+                            await viewModel.toggleFavourite()
+                        }
+                    }) {
+                        Image(systemName: viewModel.isFavourite ? "heart.fill" : "heart")
+                            .foregroundColor(.red)
+                            .padding()
+                            .background(Color.white.opacity(0.8))
+                            .clipShape(Circle())
+                            .shadow(radius: 2)
                     }
                 }
-                .frame(height: 300)
-
-                Button(action: {
-                    path.pop()
-                }) {
-                    Image(systemName: "arrow.left")
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(Color.white.opacity(0.8))
-                        .clipShape(Circle())
-                        .shadow(radius: 2)
-                }
-                .padding(.leading, 40)
+                .padding([.leading, .trailing], 20)
                 .padding(.top, 40)
-            }
 
+            }
 
             // MARK: - Scrollable Content
             ScrollView(showsIndicators: false) {
@@ -75,40 +75,22 @@ struct BusinessDetailView: View {
                     // Avatars
                     HStack(spacing: -10) {
                         ForEach(viewModel.businessDetail?.recentRedeemUsers ?? [], id: \.self) { person in
-                            AsyncImage(url: URL(string: person)) { phase in
-                                switch phase {
-                                case .empty:
-                                    ProgressView()
-                                        .frame(width: 40, height: 40)
 
-                                case .success(let image):
+                            WebImage(url: URL(string: person)) { image in
                                     image.resizable()
-                                        .scaledToFill()
-                                        .frame(width: 40, height: 40)
-                                        .clipShape(Circle())
-                                        .overlay(
-                                            Circle().stroke(Color.white, lineWidth: 2)
-                                        )
-
-                                case .failure:
-                                    Image(.product) // fallback if failed
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 40, height: 40)
-                                        .clipShape(Circle())
-                                        .overlay(
-                                            Circle().stroke(Color.white, lineWidth: 2)
-                                        )
-
-                                @unknown default:
-                                    EmptyView()
+                                } placeholder: {
+                                        Rectangle().foregroundColor(.lightgraybg)
                                 }
-                            }
+                                .onSuccess { image, data, cacheType in  }
+                                .indicator(.activity)
+                                .transition(.fade(duration: 0.5))
+                                .scaledToFill()
+                                .frame(width: 40, height: 40, alignment: .center)
+                                .clipShape(Circle())
                         }
                     }
 
 
-                    // Description
                     Text(viewModel.businessDetail?.description ?? "")
                         .customFont(style: .regular, size: .h18)
                         .foregroundStyle(.darkfont)
@@ -125,9 +107,10 @@ struct BusinessDetailView: View {
                                 path.push(screen: .scanner(product))
                             }
                         }
-                        Spacer().frame(height: 80) // leave space so button won’t overlap content
+                        Spacer().frame(height: 80)
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
             }
 
@@ -154,6 +137,7 @@ struct BusinessDetailView: View {
                 await viewModel.fetchBusinessDetail(businessId: businessId ?? 0)
             }
         }
+       
     }
 }
 
@@ -164,30 +148,18 @@ struct RewardRowView: View {
 
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: imageName)) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .frame(width: 50, height: 50)
-
-                case .success(let image):
-                    image
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .cornerRadius(8)
-
-
-                case .failure:
-                    Image(.product) // fallback if failed
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .cornerRadius(8)
-
-
-                @unknown default:
-                    EmptyView()
+            WebImage(url: URL(string: imageName)) { image in
+                    image.resizable()
+                } placeholder: {
+                        Rectangle().foregroundColor(.lightgraybg)
                 }
-            }
+                .onSuccess { image, data, cacheType in  }
+                .indicator(.activity)
+                .transition(.fade(duration: 0.5))
+                .scaledToFill()
+                .frame(width: 50, height: 50, alignment: .center)
+                .cornerRadius(8)
+        
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)

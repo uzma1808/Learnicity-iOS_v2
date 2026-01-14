@@ -11,7 +11,7 @@ class APIService {
     static let shared = APIService()
     private init() {}
 
-    private let baseURL = "https://dev.devisca.com/learnicity/public/api/v1/" 
+    private let baseURL = "https://learnicityapp.com/api/v1/"
 
     func login(email: String, password: String) async throws -> LoginResponse {
         guard let url = URL(string: baseURL + Endpoints.login) else {
@@ -262,6 +262,192 @@ class APIService {
             }
 
             return try JSONDecoder().decode(SubmitQuizResponse.self, from: data)
+        }
+
+    func setFavouriteBusiness(businessId: Int) async throws -> QuizModel {
+        guard let url = URL(string: baseURL + Endpoints.favourite + "?business_id=\(businessId)") else {
+            throw URLError(.badURL)
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        if let authHeader = UserSession.shared.authHeader {
+            request.addValue(authHeader, forHTTPHeaderField: "Authorization")
+        }
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200..<300).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+
+        return try JSONDecoder().decode(QuizModel.self, from: data)
+    }
+
+    func updateProfile(
+        name: String,
+        age: String,
+        gender: String    ) async throws -> UpdateResponse {
+
+        guard let url = URL(string: baseURL + Endpoints.update_profile) else {
+            throw URLError(.badURL)
+        }
+
+        // Request body
+        let body: [String: Any] = [
+            "name": name,
+            "age": age,
+            "gender": gender,
+        ]
+            print("body", body)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+        // Send request
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        // Validate HTTP status
+        guard let httpResponse = response as? HTTPURLResponse,
+              200..<300 ~= httpResponse.statusCode else {
+            let errorResponse = try? JSONDecoder().decode(UpdateResponse.self, from: data)
+            throw NSError(domain: "", code: (response as? HTTPURLResponse)?.statusCode ?? -1,
+                          userInfo: [NSLocalizedDescriptionKey: errorResponse?.message ?? "Update failed"])
+        }
+
+        // Decode
+        let updateResponse = try JSONDecoder().decode(UpdateResponse.self, from: data)
+        return updateResponse
+    }
+
+    func fetchFAQs() async throws -> FAQResponse {
+        guard let url = URL(string: baseURL + Endpoints.faq) else {
+            throw URLError(.badURL)
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        // Attach token if available
+        if let authHeader = UserSession.shared.authHeader {
+            request.addValue(authHeader, forHTTPHeaderField: "Authorization")
+        }
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200..<300).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+
+        return try JSONDecoder().decode(FAQResponse.self, from: data)
+    }
+
+    func fetchLeaderboard() async throws -> LeaderboardResponse {
+        guard let url = URL(string: baseURL + Endpoints.leaderboard) else {
+            throw URLError(.badURL)
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        // Attach token if available
+        if let authHeader = UserSession.shared.authHeader {
+            request.addValue(authHeader, forHTTPHeaderField: "Authorization")
+        }
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200..<300).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+
+        return try JSONDecoder().decode(LeaderboardResponse.self, from: data)
+    }
+
+    func deleteAccount() async throws -> LeaderboardResponse {
+            guard let url = URL(string: baseURL + Endpoints.delete_account) else {
+                throw URLError(.badURL)
+            }
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+
+            // Attach token if available
+            if let authHeader = UserSession.shared.authHeader {
+                request.addValue(authHeader, forHTTPHeaderField: "Authorization")
+            }
+
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200..<300).contains(httpResponse.statusCode) else {
+                throw URLError(.badServerResponse)
+            }
+
+            return try JSONDecoder().decode(LeaderboardResponse.self, from: data)
+        }
+
+    func forgotPassword(email: String) async throws -> ForgotPasswordResponse {
+           guard let url = URL(string: baseURL + "auth/forgot-password/\(email)") else {
+               throw URLError(.badURL)
+           }
+
+           var request = URLRequest(url: url)
+           request.httpMethod = "GET"
+           request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+           let (data, response) = try await URLSession.shared.data(for: request)
+           guard let httpResponse = response as? HTTPURLResponse,
+                 (200..<300).contains(httpResponse.statusCode) else {
+               throw URLError(.badServerResponse)
+           }
+
+           return try JSONDecoder().decode(ForgotPasswordResponse.self, from: data)
+       }
+
+       func resetPassword(email: String, password: String) async throws -> ResetPasswordResponse {
+           guard let url = URL(string: baseURL + "auth/reset-password") else {
+               throw URLError(.badURL)
+           }
+
+           var request = URLRequest(url: url)
+           request.httpMethod = "POST"
+           request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+           let body = ["email": email, "password": password]
+           request.httpBody = try JSONSerialization.data(withJSONObject: body)
+
+           let (data, response) = try await URLSession.shared.data(for: request)
+           guard let httpResponse = response as? HTTPURLResponse,
+                 (200..<300).contains(httpResponse.statusCode) else {
+               throw URLError(.badServerResponse)
+           }
+
+           return try JSONDecoder().decode(ResetPasswordResponse.self, from: data)
+       }
+
+    func redeemProduct(productID: Int) async throws -> RedeemProductResponse {
+            guard let url = URL(string: baseURL + "app/redeem-product?product_id=\(productID)") else {
+                throw URLError(.badURL)
+            }
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200..<300).contains(httpResponse.statusCode) else {
+                throw URLError(.badServerResponse)
+            }
+
+            return try JSONDecoder().decode(RedeemProductResponse.self, from: data)
         }
 
 }

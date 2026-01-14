@@ -26,9 +26,7 @@ extension LoginView {
 
                 if let status = response.status, status == true {
                     if let token = response.data?.token {
-                        if isRemember {
                             UserSession.shared.saveLogin(response: response)
-                        }
                     }
 
                 } else {

@@ -27,7 +27,7 @@ struct OnboardingWelcomeView: View {
                 .frame(width: 60, height: 60)
             Spacer()
             CustomButtonView(title: "Let’s Go!", action: {
-                path.push(screen: .chooseSubject)
+                path.push(screen: .chooseSubject(settings: false))
             })
             .padding(.horizontal, 17)
             .padding(.bottom)

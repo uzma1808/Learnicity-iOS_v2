@@ -16,13 +16,13 @@ struct RedeemFailedView: View {
                 path.pop()
             }
             // Title
-            Text("Redeem Error")
+            Text("Redeem Failed!")
                 .customFont(style: .black, size: .h30)
                 .foregroundStyle(.errorred)
                 .multilineTextAlignment(.center)
 
             // Subtitle
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore")
+            Text("We didn't catch that, try and scan again.")
                 .customFont(style: .regular, size: .h18)
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
@@ -89,6 +89,9 @@ struct RedeemFailedView: View {
         }
         .padding()
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        }
 
     }
 }

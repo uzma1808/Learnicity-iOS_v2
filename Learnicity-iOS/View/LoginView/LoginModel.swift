@@ -29,3 +29,9 @@ struct UserData : Codable {
     let email : String?
     let profile_image : String?
 }
+
+struct UpdateResponse: Decodable {
+    let status : Bool?
+    let message : String?
+    let data : UserData?
+}

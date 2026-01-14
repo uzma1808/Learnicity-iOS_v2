@@ -11,6 +11,7 @@ struct ScanScreen: View {
     @State private var scannedCode: String? = nil
     var productDetails: Product?
     @Binding var path: NavigationPath
+    @StateObject var viewModel = RedeemProductViewModel()
     var body: some View {
         VStack(spacing: 20) {
             CustomHeaderView(title: "") {
@@ -21,7 +22,7 @@ struct ScanScreen: View {
                 .customFont(style: .black, size: .h30)
 
             // Subtitle
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore")
+            Text("Scan the Learnicity QR Code in the Business. It is normally placed near the register.")
                 .customFont(style: .regular, size: .h18)
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
@@ -47,16 +48,25 @@ struct ScanScreen: View {
         }
         .padding()
         .navigationBarBackButtonHidden(true)
+        .loadingIndicator($viewModel.isLoading)
         .onChange(of: scannedCode) { oldValue, newValue in
             print("***QRCode", newValue)
             if newValue != nil {
                 if productDetails?.qrcodeString == newValue {
-                    path.push(screen: .redeemSuccess(productDetails!))
+                    if let id = productDetails?.id {
+                        Task {
+                            let status = await viewModel.redeemProduct(productID: id)
+                            if status {
+                                path.push(screen: .redeemSuccess(productDetails!))
+                            } else {
+                                path.push(screen: .redeemFailed)
+                            }
+                        }
+                    }
                 } else {
                     path.push(screen: .redeemFailed)
                 }
             }
-
         }
     }
 }
