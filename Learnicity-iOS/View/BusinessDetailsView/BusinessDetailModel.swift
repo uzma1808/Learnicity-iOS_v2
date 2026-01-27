@@ -38,8 +38,8 @@ struct BusinessDetailData: Codable, Identifiable {
 
 struct Product: Codable, Hashable {
     let id: Int?
-    let businessId: String?
-    let rewardTierId: String?
+    let businessId: Int?
+    let rewardTierId: Int?
     let name: String?
     let image: String?
     let description: String?

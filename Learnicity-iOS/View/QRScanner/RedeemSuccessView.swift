@@ -68,7 +68,7 @@ struct RedeemSuccessView: View {
             Spacer()
             HStack(spacing: 12) {
                 Button(action: {
-                    path.push(screen: .businessMap)
+                    path.popToRoot(index: 1)
                 }) {
                     HStack {
                         Image(.home)

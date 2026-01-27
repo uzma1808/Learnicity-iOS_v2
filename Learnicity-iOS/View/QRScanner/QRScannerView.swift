@@ -21,9 +21,11 @@ struct QRScannerView: UIViewRepresentable {
                             from connection: AVCaptureConnection) {
             if let metadataObject = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
                let code = metadataObject.stringValue {
-                parent.scannedCode = code   // ✅ Success → QR code string available
-                print("QRCODE", code)
-
+                if parent.scannedCode == nil {
+                    parent.scannedCode = code   // ✅ Success → QR code string available
+                    print("QRCODE", code)
+                    parent.session.stopRunning()
+                }
             } else {
                 // ❌ Failure → No QR code detected
                 parent.scannedCode = nil
@@ -67,7 +69,11 @@ struct QRScannerView: UIViewRepresentable {
     }
 
 
-    func updateUIView(_ uiView: UIView, context: Context) {}
+    func updateUIView(_ uiView: UIView, context: Context) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            session.startRunning()
+        }
+    }
 
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)

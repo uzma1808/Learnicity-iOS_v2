@@ -7,8 +7,8 @@
 
 
 struct Constants {
-    static let contact_us = "https://dev.devisca.com/learnicity/public/contact-us"
-    static let privacy_policy = "https://dev.devisca.com/learnicity/public/privacy-policy"
-    static let terms_conditions = "https://dev.devisca.com/learnicity/public/terms-of-use"
+    static let contact_us = "https://learnicityapp.com/public/contact-us"
+    static let privacy_policy = "https://learnicityapp.com/public/privacy-policy"
+    static let terms_conditions = "https://learnicityapp.com/terms-of-use"
 
 }

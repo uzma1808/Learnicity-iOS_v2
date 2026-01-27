@@ -11,39 +11,35 @@ import KeyboardManager_SwiftUI
 struct AgeBottomSheet: View {
     @Binding var isPresented: Bool
     @State var selectedAge: String
-    var actionSave: (String) -> Void?
+    @FocusState private var isFocused: Bool
+
+    var actionSave: (String) -> Void
 
     var body: some View {
-        ZStack {
-            VStack(spacing: 20) {
-                Capsule()
-                    .fill(Color.gray.opacity(0.5))
-                    .frame(width: 40, height: 5)
-                    .padding(.top, 8)
+        VStack(spacing: 20) {
+            Capsule()
+                .frame(width: 40, height: 5)
+                .padding(.top, 8)
 
-                Text("Age")
-                    .font(.system(size: 18, weight: .bold))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                CustomTextfieldView(placeholder: "Enter age", text: $selectedAge)
-                    .frame(height: 58)
+            Text("Age")
+                .font(.headline)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
-                CustomButtonView(title: "Save") {
-                    isPresented = false
-                    actionSave(selectedAge)
-                }
-            }
-            .padding(.horizontal)
-            .padding(.vertical, 24)
-            .background(Color.white)
-            .cornerRadius(20)
-            .frame(maxWidth: .infinity)
-            .padding(.bottom, 0)
-            .frame(maxHeight: .infinity, alignment: .bottom)
-            .keyboardAdaptive()
-            .onTapGesture {
+            CustomTextfieldView(placeholder: "Enter age", text: $selectedAge)
+                .frame(height: 58)
+                .focused($isFocused)
+
+            CustomButtonView(title: "Save") {
                 hideKeyboard()
+                isPresented = false
+                actionSave(selectedAge)
             }
         }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(20)
+        .keyboardAdaptive()
+        .onAppear { isFocused = true }
     }
 }
 

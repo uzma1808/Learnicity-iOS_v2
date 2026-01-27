@@ -141,12 +141,17 @@ struct EditProfileView: View {
         }
         .toast($showToast, "Profile updated!")
         .popup(isPresented: $showGenderMenu) {
-            GenderBottomSheet(isPresented: $showGenderMenu, selectedGender: viewModel.gender) { selectedGender in
-                viewModel.gender = selectedGender
-            }
+            GenderBottomSheet(
+                isPresented: $showGenderMenu,
+                actionSave: { selectedGender in
+                    viewModel.gender = selectedGender
+                },
+                selectedGender: viewModel.gender
+            )
         } customize: {
             $0.type(.toast).position(.bottom).closeOnTap(false).backgroundColor(.black.opacity(0.4))
         }
+
         .popup(isPresented: $showAge) {
             AgeBottomSheet(isPresented: $showAge, selectedAge: viewModel.age) { selectedAge in
                 viewModel.age = selectedAge

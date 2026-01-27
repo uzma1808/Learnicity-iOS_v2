@@ -62,6 +62,7 @@ struct RedeemFailedView: View {
                 .cornerRadius(12)
 
             Button(action: {
+                path.popToRoot(index: 1)
             }) {
                 HStack {
                     Image(.home)

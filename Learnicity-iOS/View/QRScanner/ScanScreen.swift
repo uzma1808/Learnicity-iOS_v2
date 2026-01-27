@@ -12,6 +12,8 @@ struct ScanScreen: View {
     var productDetails: Product?
     @Binding var path: NavigationPath
     @StateObject var viewModel = RedeemProductViewModel()
+    @State private var scannerId = UUID()
+
     var body: some View {
         VStack(spacing: 20) {
             CustomHeaderView(title: "") {
@@ -31,6 +33,7 @@ struct ScanScreen: View {
             // QR Scanner
             ZStack {
                 QRScannerView(scannedCode: $scannedCode)
+                    .id(scannerId)
                     .frame(width: 250, height: 250)
                     .cornerRadius(16)
                     .overlay(
@@ -50,7 +53,7 @@ struct ScanScreen: View {
         .navigationBarBackButtonHidden(true)
         .loadingIndicator($viewModel.isLoading)
         .onChange(of: scannedCode) { oldValue, newValue in
-            print("***QRCode", newValue)
+            print("***QRCode", newValue ?? "")
             if newValue != nil {
                 if productDetails?.qrcodeString == newValue {
                     if let id = productDetails?.id {
@@ -67,6 +70,10 @@ struct ScanScreen: View {
                     path.push(screen: .redeemFailed)
                 }
             }
+        }
+        .onAppear {
+            scannedCode = nil
+            scannerId = UUID()
         }
     }
 }
