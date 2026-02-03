@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 extension EditProfileView {
     @MainActor
@@ -16,6 +17,7 @@ extension EditProfileView {
         @Published var age: String = String(UserSession.shared.user?.age ?? 0)
         @Published var gender: String = UserSession.shared.user?.gender ?? ""
         @Published var email: String = UserSession.shared.user?.email ?? ""
+        @Published var selectedImage: UIImage?
         @Published var fname : String = ""
         @Published var lname : String = ""
         @Published var isLoading: Bool = false
@@ -32,24 +34,28 @@ extension EditProfileView {
                 let response: UpdateResponse = try await APIService.shared.updateProfile(
                     name: name,
                     age: age,
-                    gender: gender.lowercased()
+                    gender: gender.lowercased(),
+                    image: selectedImage  // <-- pass image here
                 )
 
                 if let status = response.status, status == true {
-                    // Save user session
-                    let loginres = LoginResponse(status: status, message: response.message, data: LoginData(user: response.data, token: UserSession.shared.token, token_type: UserSession.shared.tokenType))
-
+                    let loginres = LoginResponse(
+                        status: status,
+                        message: response.message,
+                        data: LoginData(
+                            user: response.data,
+                            token: UserSession.shared.token,
+                            token_type: UserSession.shared.tokenType
+                        )
+                    )
                     UserSession.shared.saveLogin(response: loginres)
-                    print("Update successful, user: \(UserSession.shared.user?.name ?? "")")
                 } else {
                     errorMessage = response.message ?? "Update profile failed. Please try again."
                     showError = true
                 }
-
             } catch {
                 errorMessage = "Update profile failed. Please try again."
                 showError = true
-                print("Signup error: \(error.localizedDescription)")
             }
 
             isLoading = false

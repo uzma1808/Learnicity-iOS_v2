@@ -16,6 +16,7 @@ struct GoogleMapView: UIViewRepresentable {
     var coordinate: CLLocationCoordinate2D?
     var businesses: [BusinessDetailData]
     var onMarkerTap: ((BusinessDetailData) -> Void)?
+    @Binding var shouldRecenter: Bool  // <-- new binding
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -35,42 +36,48 @@ struct GoogleMapView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: GMSMapView, context: Context) {
-        uiView.clear()
-
-        // Re-center if coordinate set
-        if let coord = coordinate {
+        // Center map on first load OR when search triggers it
+        if shouldRecenter, let coord = coordinate {
             let camera = GMSCameraPosition.camera(
                 withLatitude: coord.latitude,
                 longitude: coord.longitude,
                 zoom: 15
             )
             uiView.animate(to: camera)
+            DispatchQueue.main.async {
+                self.shouldRecenter = false  // <-- reset after centering
+            }
         }
 
-        // Add business markers
-        for business in businesses {
-            if let latStr = business.latitude,
-               let lonStr = business.longitude,
-               let lat = Double(latStr),
-               let lon = Double(lonStr) {
+        // Only re-add markers if list changed
+        if context.coordinator.currentBusinessCount != businesses.count {
+            uiView.clear()
+            for business in businesses {
+                if let latStr = business.latitude,
+                   let lonStr = business.longitude,
+                   let lat = Double(latStr),
+                   let lon = Double(lonStr) {
 
-                let marker = GMSMarker(
-                    position: CLLocationCoordinate2D(latitude: lat, longitude: lon)
-                )
-                marker.title = business.name
-                marker.snippet = business.address
-                marker.userData = business   // ✅ attach business data here
-                if let image = UIImage(named: "mappin") {
-                    marker.icon = image.resized(to: CGSize(width: 55, height: 55))
+                    let marker = GMSMarker(
+                        position: CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                    )
+                    marker.title = business.name
+                    marker.snippet = business.address
+                    marker.userData = business
+                    if let image = UIImage(named: "mappin") {
+                        marker.icon = image.resized(to: CGSize(width: 55, height: 55))
+                    }
+                    marker.map = uiView
                 }
-                marker.map = uiView
             }
+            context.coordinator.currentBusinessCount = businesses.count
         }
     }
 
     // MARK: - Coordinator
     class Coordinator: NSObject, GMSMapViewDelegate {
         var parent: GoogleMapView
+        var currentBusinessCount: Int = -1
 
         init(_ parent: GoogleMapView) {
             self.parent = parent
@@ -78,7 +85,7 @@ struct GoogleMapView: UIViewRepresentable {
 
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             if let business = marker.userData as? BusinessDetailData {
-                parent.onMarkerTap?(business) // ✅ callback works now
+                parent.onMarkerTap?(business)
             }
             return true
         }

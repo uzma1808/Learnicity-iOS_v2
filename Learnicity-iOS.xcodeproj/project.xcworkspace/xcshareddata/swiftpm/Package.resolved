@@ -1,5 +1,5 @@
 {
-  "originHash" : "4299e7b6b0bbda7e7d50b07ca18d71ed69495efbab5d88994ad19812d484236a",
+  "originHash" : "1cce87469ca0da3fdb0a89046916965db6ccb8859dc84cc26530013fbfdc810e",
   "pins" : [
     {
       "identity" : "activityindicatorview",
@@ -26,15 +26,6 @@
       "state" : {
         "revision" : "987497b1eb8a7bbce8cb1d86b2c7cd64d0302452",
         "version" : "10.1.0"
-      }
-    },
-    {
-      "identity" : "keyboardmanager-swiftui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/hitendradeveloper/KeyboardManager-SwiftUI.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "340f424c7fc4298444d54d15838ef9269e965608"
       }
     },
     {

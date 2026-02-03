@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         // Initialize services here
         GMSServices.provideAPIKey("AIzaSyAxB6TxyRkLBk_HCCLbu1vk5GEIQKrZ1_c")
-        GMSPlacesClient.provideAPIKey("AIzaSyAxB6TxyRkLBk_HCCLbu1vk5GEIQKrZ1_c")
+        GMSPlacesClient.provideAPIKey("AIzaSyCs38yicf_y9_2pbwDky1-vZRXG4-e9Z6o")
 
         return true
     }

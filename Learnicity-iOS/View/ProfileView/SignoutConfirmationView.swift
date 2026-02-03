@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignoutConfirmationView: View {
     @Binding var isPresented: Bool
-    var action: () -> Void?
+    var action: () -> Void  // Fixed: removed the optional (?) from Void
 
     var body: some View {
         VStack(spacing: 40) {
@@ -47,15 +47,11 @@ struct SignoutConfirmationView: View {
                         .cornerRadius(8)
                 }
             }
-
         }
         .padding(.horizontal)
         .padding(.vertical, 24)
         .background(Color.white)
         .cornerRadius(20)
-        .frame(maxWidth: .infinity)
-        .padding(.bottom, 0)
-        .frame(maxHeight: .infinity, alignment: .bottom)
     }
 }
 

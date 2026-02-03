@@ -12,6 +12,7 @@ import CoreLocation
 struct BusinessMapView: View {
     @State private var showingAutocomplete = false
     @State private var selectedCoordinate: CLLocationCoordinate2D?
+    @State private var shouldRecenter: Bool = true  // <-- true on first load
     @Binding var path: NavigationPath
     @StateObject private var viewModel = BusinessListView.BusinessViewModel()
     @StateObject private var locationManager = LocationManager()
@@ -20,16 +21,15 @@ struct BusinessMapView: View {
         ZStack(alignment: .top) {
             GoogleMapView(
                 coordinate: selectedCoordinate,
-                businesses: viewModel.businesses
-            ) { business in
-                path.push(screen: .businessDetails(business.id ?? 0))
-            }
-            .ignoresSafeArea()
-
+                businesses: viewModel.businesses,
+                onMarkerTap: { business in
+                    path.push(screen: .businessDetails(business.id ?? 0))
+                },
+                shouldRecenter: $shouldRecenter  // <-- pass binding
+            )
             .ignoresSafeArea()
 
             VStack {
-                // Search Button
                 HStack {
                     Spacer()
                     Button {
@@ -48,7 +48,7 @@ struct BusinessMapView: View {
                 .padding()
 
                 Spacer()
-                // Bottom bar
+
                 HStack(spacing: 12) {
                     Button(action: { path.pop() }) {
                         HStack {
@@ -86,6 +86,7 @@ struct BusinessMapView: View {
             PlacesAutocompleteSheet { place in
                 if let place = place {
                     selectedCoordinate = place.coordinate
+                    shouldRecenter = true  // <-- trigger recenter on search
                     Task {
                         await viewModel.fetchBusinesses(
                             latitude: place.coordinate.latitude,
@@ -96,17 +97,32 @@ struct BusinessMapView: View {
                 }
             }
         }
-        .onReceive(locationManager.$currentLocation.compactMap { $0 }) { coord in
-            selectedCoordinate = coord
-            Task {
-                await viewModel.fetchBusinesses(
-                    latitude: coord.latitude,
-                    longitude: coord.longitude,
-                    type: "list"
-                )
+        .onAppear {
+            if let coord = locationManager.currentLocation {
+                selectedCoordinate = coord
+                shouldRecenter = true  // <-- center on first load
+                Task {
+                    await viewModel.fetchBusinesses(
+                        latitude: coord.latitude,
+                        longitude: coord.longitude,
+                        type: "list"
+                    )
+                }
             }
         }
-
+        .onReceive(locationManager.$currentLocation.compactMap { $0 }) { coord in
+            if selectedCoordinate == nil {
+                selectedCoordinate = coord
+                shouldRecenter = true  // <-- center only on very first location
+                Task {
+                    await viewModel.fetchBusinesses(
+                        latitude: coord.latitude,
+                        longitude: coord.longitude,
+                        type: "list"
+                    )
+                }
+            }
+        }
     }
 }
 

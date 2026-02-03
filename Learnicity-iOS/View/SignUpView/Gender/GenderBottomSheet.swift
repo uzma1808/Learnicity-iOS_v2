@@ -30,19 +30,26 @@ struct GenderBottomSheet: View {
                 .font(.system(size: 18, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            ForEach(options, id: \.self) { option in
-                HStack {
-                    Text(option)
-                        .foregroundColor(.black)
-                    Spacer()
-                    Image(systemName: selectedGender == option ? "largecircle.fill.circle" : "circle")
-                        .foregroundColor(.blue)
-                }
-                .contentShape(Rectangle()) // This ensures the entire row is tappable
-                .onTapGesture {
-                    selectedGender = option
+            // Wrap options in ScrollView for proper scrolling
+            ScrollView {
+                VStack(spacing: 16) {
+                    ForEach(options, id: \.self) { option in
+                        HStack {
+                            Text(option)
+                                .foregroundColor(.black)
+                            Spacer()
+                            Image(systemName: selectedGender == option ? "largecircle.fill.circle" : "circle")
+                                .foregroundColor(.blue)
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            selectedGender = option
+                        }
+                        .padding(.vertical, 4)
+                    }
                 }
             }
+            .frame(maxHeight: 140) // Limit height if you have many options
 
             CustomButtonView(title: "Save") {
                 isPresented = false

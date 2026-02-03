@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PopupView
+import KeyboardManager_SwiftUI
 
 struct ActionSheetsState {
     var showingFirst = false
@@ -14,26 +15,26 @@ struct ActionSheetsState {
 }
 
 struct SignupView: View {
-
+    
     @Binding var path: NavigationPath
     @State private var showGenderMenu: Bool = false
     @State private var showAge: Bool = false
     @State private var showName: Bool = false
     @State var actionSheets = ActionSheetsState()
     @StateObject private var viewModel = SignupViewModel()
-
-
+    
+    
     let genders = ["Male", "Female", "Other"]
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-
+                
                 // Back button + title
                 CustomHeaderView(title: "Sign up", backAction: {
                     path.pop()
                 })
-
+                
                 Image(.animalsignup)
                     .resizable()
                     .scaledToFit()
@@ -48,8 +49,8 @@ struct SignupView: View {
                                 Color.clear
                             }
                         )
-
-
+                    
+                    
                     // Age + Gender in horizontal stack
                     HStack(spacing: 16) {
                         CustomTextfieldView(placeholder: "Age", text: $viewModel.age)
@@ -61,7 +62,7 @@ struct SignupView: View {
                                     Color.clear
                                 }
                             )
-
+                        
                         CustomTextfieldView(placeholder: "Gender", text: $viewModel.gender)
                             .frame(height: 58)
                             .overlay(
@@ -72,22 +73,22 @@ struct SignupView: View {
                                 }
                             )
                     }
-
+                    
                     // Email
                     CustomTextfieldView(placeholder: "Email", text: $viewModel.email)
                         .frame(height: 58)
                     // Password
                     CustomTextfieldView(placeholder: "Password", text: $viewModel.password,isSecure: true)
                         .frame(height: 58)
-
+                    
                     // Confirm Password
                     CustomTextfieldView(placeholder: "Confirm Password", text: $viewModel.confirmPassword, isSecure: true)
                         .frame(height: 58)
                 }
                 .padding(.horizontal, 28)
                 // Name
-
-
+                
+                
                 // Already have an account
                 HStack(alignment: .center, spacing: 2) {
                     Text("Do you have an account?")
@@ -104,10 +105,10 @@ struct SignupView: View {
                 Spacer()
                 CustomButtonView(title: "Sign up") {
                     if viewModel.validate() {
-                          Task {
-                              await viewModel.callSignupApi()
-                          }
-                      } else {
+                        Task {
+                            await viewModel.callSignupApi()
+                        }
+                    } else {
                         viewModel.showError = true
                     }
                 }
@@ -117,7 +118,7 @@ struct SignupView: View {
             .padding(.top)
             .background(Color.white.ignoresSafeArea())
             .navigationBarBackButtonHidden()
-
+            
         }
         .popup(isPresented: $showGenderMenu) {
             GenderBottomSheet(
@@ -127,10 +128,17 @@ struct SignupView: View {
                 },
                 selectedGender: viewModel.gender
             )
+            
         } customize: {
-            $0.type(.toast).position(.bottom).closeOnTap(false).backgroundColor(.black.opacity(0.4))
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)                    // <-- changed to false
+                .closeOnTapOutside(true)              // <-- this closes when tapping the dark background
+                .backgroundColor(.black.opacity(0.4))
+                .allowTapThroughBG(false)
         }
-
+        
         .popup(isPresented: $showAge) {
             AgeBottomSheet(isPresented: $showAge, selectedAge: viewModel.age) { selectedAge in
                 viewModel.age = selectedAge
@@ -141,6 +149,7 @@ struct SignupView: View {
                 .position(.bottom)
                 .closeOnTap(false)
                 .backgroundColor(.black.opacity(0.4))
+                .allowTapThroughBG(false)
         }
         .popup(isPresented: $showName) {
             NameBottomSheet(isPresented: $showName) { fname, lname in
@@ -152,8 +161,9 @@ struct SignupView: View {
                 .position(.bottom)
                 .closeOnTap(false)
                 .backgroundColor(.black.opacity(0.4))
+                .allowTapThroughBG(false)
         }
-
+        
         .popup(isPresented: $viewModel.showError) {
             ErrorView(errorMessage: viewModel.errorMessage ?? "" )
         } customize: {
@@ -174,7 +184,7 @@ struct SignupView: View {
         .onTapGesture {
             hideKeyboard()
         }
-
+        
     }
 }
 

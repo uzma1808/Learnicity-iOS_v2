@@ -70,7 +70,6 @@
 		FA9ADB042E7B0F1E00FEBDCD /* BusinessDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9ADB032E7B0F1300FEBDCD /* BusinessDetailViewModel.swift */; };
 		FA9ADB062E7B10E800FEBDCD /* BusinessDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9ADB052E7B10E000FEBDCD /* BusinessDetailModel.swift */; };
 		FAC2EEA72E4DFB13005A51E8 /* AgeBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC2EEA62E4DFB13005A51E8 /* AgeBottomSheet.swift */; };
-		FAC2EEAC2E4E04B4005A51E8 /* KeyboardManager-SwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAC2EEAB2E4E04B4005A51E8 /* KeyboardManager-SwiftUI */; };
 		FAC2EEAE2E4E061E005A51E8 /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC2EEAD2E4E061E005A51E8 /* View + Extension.swift */; };
 		FAC2EEB12E4E0792005A51E8 /* NameBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC2EEB02E4E0792005A51E8 /* NameBottomSheet.swift */; };
 		FAC2EEB32E4FA811005A51E8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC2EEB22E4FA80B005A51E8 /* LoginViewModel.swift */; };
@@ -237,7 +236,6 @@
 			files = (
 				FAC308922E9D8DC800C82950 /* SDWebImageSwiftUI in Frameworks */,
 				FA95E4182E4128E8001B38F2 /* PopupView in Frameworks */,
-				FAC2EEAC2E4E04B4005A51E8 /* KeyboardManager-SwiftUI in Frameworks */,
 				FA9ADAE42E7889FB00FEBDCD /* ActivityIndicatorView in Frameworks */,
 				FA9ADAF82E7AE04300FEBDCD /* GooglePlaces in Frameworks */,
 				FAC425DD2E5E422F00875F80 /* GoogleMaps in Frameworks */,
@@ -669,7 +667,6 @@
 			name = "Learnicity-iOS";
 			packageProductDependencies = (
 				FA95E4172E4128E8001B38F2 /* PopupView */,
-				FAC2EEAB2E4E04B4005A51E8 /* KeyboardManager-SwiftUI */,
 				FAC425DC2E5E422F00875F80 /* GoogleMaps */,
 				FA9ADAE32E7889FB00FEBDCD /* ActivityIndicatorView */,
 				FA9ADAF72E7AE04300FEBDCD /* GooglePlaces */,
@@ -761,7 +758,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				FA95E4162E4128E8001B38F2 /* XCRemoteSwiftPackageReference "PopupView" */,
-				FAC2EEAA2E4E04B4005A51E8 /* XCRemoteSwiftPackageReference "KeyboardManager-SwiftUI" */,
 				FAC425DB2E5E422F00875F80 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				FA9ADAE22E7889FB00FEBDCD /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				FA9ADAF62E7AE04300FEBDCD /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
@@ -1056,8 +1052,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_ASSET_PATHS = "\"Learnicity-iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 6MA54R3X44;
+				DEVELOPMENT_TEAM = 747QS77A54;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Learnicity-iOS/Info.plist";
@@ -1094,8 +1089,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_ASSET_PATHS = "\"Learnicity-iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 6MA54R3X44;
+				DEVELOPMENT_TEAM = 747QS77A54;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Learnicity-iOS/Info.plist";
@@ -1259,14 +1253,6 @@
 				minimumVersion = 10.1.0;
 			};
 		};
-		FAC2EEAA2E4E04B4005A51E8 /* XCRemoteSwiftPackageReference "KeyboardManager-SwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hitendradeveloper/KeyboardManager-SwiftUI.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		FAC308902E9D8DC800C82950 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
@@ -1313,11 +1299,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA9ADAF62E7AE04300FEBDCD /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
 			productName = GooglePlacesSwift;
-		};
-		FAC2EEAB2E4E04B4005A51E8 /* KeyboardManager-SwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = FAC2EEAA2E4E04B4005A51E8 /* XCRemoteSwiftPackageReference "KeyboardManager-SwiftUI" */;
-			productName = "KeyboardManager-SwiftUI";
 		};
 		FAC308912E9D8DC800C82950 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

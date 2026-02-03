@@ -11,13 +11,14 @@ import KeyboardManager_SwiftUI
 struct AgeBottomSheet: View {
     @Binding var isPresented: Bool
     @State var selectedAge: String
-    @FocusState private var isFocused: Bool
-
     var actionSave: (String) -> Void
+    @StateObject private var keyboard = KeyboardObserver()
+
 
     var body: some View {
         VStack(spacing: 20) {
             Capsule()
+                .fill(Color.gray.opacity(0.5))
                 .frame(width: 40, height: 5)
                 .padding(.top, 8)
 
@@ -27,7 +28,6 @@ struct AgeBottomSheet: View {
 
             CustomTextfieldView(placeholder: "Enter age", text: $selectedAge)
                 .frame(height: 58)
-                .focused($isFocused)
 
             CustomButtonView(title: "Save") {
                 hideKeyboard()
@@ -38,10 +38,13 @@ struct AgeBottomSheet: View {
         .padding()
         .background(Color.white)
         .cornerRadius(20)
-        .keyboardAdaptive()
-        .onAppear { isFocused = true }
+        .padding(.bottom, keyboard.height)
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
 }
+
 
 #Preview {
     AgeBottomSheet(isPresented: .constant(false), selectedAge: "", actionSave: {_ in})

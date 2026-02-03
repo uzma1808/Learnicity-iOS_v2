@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+
 class APIService {
 
     static let shared = APIService()
@@ -286,41 +288,95 @@ class APIService {
         return try JSONDecoder().decode(QuizModel.self, from: data)
     }
 
+    // MARK: - API Function - add image parameter
     func updateProfile(
         name: String,
         age: String,
-        gender: String    ) async throws -> UpdateResponse {
+        gender: String,
+        image: UIImage?
+    ) async throws -> UpdateResponse {
 
         guard let url = URL(string: baseURL + Endpoints.update_profile) else {
             throw URLError(.badURL)
         }
 
-        // Request body
-        let body: [String: Any] = [
-            "name": name,
-            "age": age,
-            "gender": gender,
-        ]
-            print("body", body)
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        // Use multipart form data if image is present, otherwise JSON
+        if let image = image, let imageData = image.jpegData(compressionQuality: 0.8) {
+            let boundary = UUID().uuidString
+            var body = Data()
 
-        // Send request
-        let (data, response) = try await URLSession.shared.data(for: request)
+            // Name field
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"name\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(name)\r\n".data(using: .utf8)!)
 
-        // Validate HTTP status
-        guard let httpResponse = response as? HTTPURLResponse,
-              200..<300 ~= httpResponse.statusCode else {
-            let errorResponse = try? JSONDecoder().decode(UpdateResponse.self, from: data)
-            throw NSError(domain: "", code: (response as? HTTPURLResponse)?.statusCode ?? -1,
-                          userInfo: [NSLocalizedDescriptionKey: errorResponse?.message ?? "Update failed"])
+            // Age field
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"age\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(age)\r\n".data(using: .utf8)!)
+
+            // Gender field
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"gender\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(gender)\r\n".data(using: .utf8)!)
+
+            // Image field
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"profile_image\"; filename=\"profile.jpg\"\r\n".data(using: .utf8)!)
+            body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+            body.append(imageData)
+            body.append("\r\n".data(using: .utf8)!)
+
+            // Close boundary
+            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            request.httpBody = body
+            if let authHeader = UserSession.shared.authHeader {
+                request.addValue(authHeader, forHTTPHeaderField: "Authorization")
+            }
+
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse,
+                  200..<300 ~= httpResponse.statusCode else {
+                let errorResponse = try? JSONDecoder().decode(UpdateResponse.self, from: data)
+                throw NSError(domain: "", code: (response as? HTTPURLResponse)?.statusCode ?? -1,
+                              userInfo: [NSLocalizedDescriptionKey: errorResponse?.message ?? "Update failed"])
+            }
+
+            return try JSONDecoder().decode(UpdateResponse.self, from: data)
+
+        } else {
+            // No image — send as JSON like before
+            let body: [String: Any] = [
+                "name": name,
+                "age": age,
+                "gender": gender,
+            ]
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+//            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+            if let authHeader = UserSession.shared.authHeader {
+                request.addValue(authHeader, forHTTPHeaderField: "Authorization")
+            }
+
+
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse,
+                  200..<300 ~= httpResponse.statusCode else {
+                let errorResponse = try? JSONDecoder().decode(UpdateResponse.self, from: data)
+                throw NSError(domain: "", code: (response as? HTTPURLResponse)?.statusCode ?? -1,
+                              userInfo: [NSLocalizedDescriptionKey: errorResponse?.message ?? "Update failed"])
+            }
+
+            return try JSONDecoder().decode(UpdateResponse.self, from: data)
         }
-
-        // Decode
-        let updateResponse = try JSONDecoder().decode(UpdateResponse.self, from: data)
-        return updateResponse
     }
 
     func fetchFAQs() async throws -> FAQResponse {

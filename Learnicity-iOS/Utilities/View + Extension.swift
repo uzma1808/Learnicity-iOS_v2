@@ -62,7 +62,7 @@ struct AppToast: ViewModifier {
                     .padding()
             }  .fixedSize(horizontal: false, vertical: true)
                 .frame(minWidth: 180, minHeight: 50)
-                .background(Color.white)
+                .background(Color.bluefont)
                 .cornerRadius(30.0)
         } customize: {
             $0

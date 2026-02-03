@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct EditProfileView: View {
     @Binding var path: NavigationPath
@@ -16,58 +17,42 @@ struct EditProfileView: View {
     @StateObject private var viewModel = EditProfileViewModel()
     let genders = ["Male", "Female", "Other"]
     @State private var showToast: Bool = false
-
+    
     // MARK: - Image Picker States
     @State private var showImagePicker = false
-    @State private var selectedImage: UIImage?
     @State private var imagePickerSource: UIImagePickerController.SourceType = .photoLibrary
     @State private var showSourceActionSheet = false
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-
+                
                 CustomHeaderView(title: "Edit Profile", backAction: {
                     path.pop()
                 })
-
+                
                 // MARK: - Profile Image with Camera Button
                 ZStack(alignment: .bottomTrailing) {
-                    if let selectedImage = selectedImage {
+                    if let selectedImage = viewModel.selectedImage {
                         Image(uiImage: selectedImage)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 90, height: 90)
                             .clipShape(Circle())
                     } else {
-                        AsyncImage(url: URL(string: UserSession.shared.user?.profile_image ?? "")) { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                                    .frame(width: 90, height: 90)
-                                    .clipShape(Circle())
-
-                            case .success(let image):
+                        WebImage(url: URL(string: UserSession.shared.user?.profile_image ?? "")) { image in
                                 image.resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 90, height: 90)
-                                    .clipShape(Circle())
-
-                            case .failure:
-                                Image(.user)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 90, height: 90)
-                                    .clipShape(Circle())
-
-                            @unknown default:
-                                EmptyView()
+                            } placeholder: {
+                                    Rectangle().foregroundColor(.lightgraybg)
                             }
-                        }
-                        .frame(width: 90, height: 90)
-                        .clipShape(Circle())
+                            .onSuccess { image, data, cacheType in  }
+                            .indicator(.activity)
+                            .transition(.fade(duration: 0.5))
+                            .scaledToFill()
+                            .frame(width: 90, height: 90, alignment: .center)
+                            .clipShape(Circle())
                     }
-
+                    
                     // Camera button
                     Button(action: {
                         showSourceActionSheet = true
@@ -81,7 +66,7 @@ struct EditProfileView: View {
                     }
                     .offset(x: -5, y: 0)
                 }
-
+                
                 // MARK: - Fields
                 VStack(spacing: 16) {
                     CustomTextfieldView(placeholder: "Name", text: $viewModel.name)
@@ -91,7 +76,7 @@ struct EditProfileView: View {
                                 Color.clear
                             }
                         )
-
+                    
                     HStack(spacing: 16) {
                         CustomTextfieldView(placeholder: "Age", text: $viewModel.age)
                             .frame(height: 58)
@@ -100,7 +85,7 @@ struct EditProfileView: View {
                                     Color.clear
                                 }
                             )
-
+                        
                         CustomTextfieldView(placeholder: "Gender", text: $viewModel.gender)
                             .frame(height: 58)
                             .overlay(
@@ -109,16 +94,16 @@ struct EditProfileView: View {
                                 }
                             )
                     }
-
+                    
                     CustomTextfieldView(placeholder: "Email", text: $viewModel.email)
                         .frame(height: 58)
                         .opacity(0.5)
                         .disabled(true)
                 }
                 .padding(.horizontal, 28)
-
+                
                 Spacer()
-
+                
                 // MARK: - Update Button
                 CustomButtonView(title: "Update") {
                     if viewModel.validate() {
@@ -139,6 +124,7 @@ struct EditProfileView: View {
             .background(Color.white.ignoresSafeArea())
             .navigationBarBackButtonHidden()
         }
+        .scrollDismissesKeyboard(.interactively)
         .toast($showToast, "Profile updated!")
         .popup(isPresented: $showGenderMenu) {
             GenderBottomSheet(
@@ -149,15 +135,25 @@ struct EditProfileView: View {
                 selectedGender: viewModel.gender
             )
         } customize: {
-            $0.type(.toast).position(.bottom).closeOnTap(false).backgroundColor(.black.opacity(0.4))
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
+                .allowTapThroughBG(false)
         }
-
+        
         .popup(isPresented: $showAge) {
             AgeBottomSheet(isPresented: $showAge, selectedAge: viewModel.age) { selectedAge in
                 viewModel.age = selectedAge
             }
         } customize: {
-            $0.type(.toast).position(.bottom).closeOnTap(false).backgroundColor(.black.opacity(0.4))
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
+                .allowTapThroughBG(false)
         }
         .popup(isPresented: $showName) {
             NameBottomSheet(isPresented: $showName, fName: viewModel.fname, lName: viewModel.lname) { fname, lname in
@@ -166,7 +162,12 @@ struct EditProfileView: View {
                 viewModel.lname = lname
             }
         } customize: {
-            $0.type(.toast).position(.bottom).closeOnTap(false).backgroundColor(.black.opacity(0.4))
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)
+                .backgroundColor(.black.opacity(0.4))
+                .allowTapThroughBG(false)
         }
         .popup(isPresented: $viewModel.showError) {
             ErrorView(errorMessage: viewModel.errorMessage ?? "")
@@ -180,7 +181,7 @@ struct EditProfileView: View {
             viewModel.fname = names.first ?? ""
             viewModel.lname = names.last ?? ""
         }
-
+        
         // MARK: - Image Picker Sheets
         .confirmationDialog("Select Image Source", isPresented: $showSourceActionSheet) {
             Button("Camera") {
@@ -194,7 +195,7 @@ struct EditProfileView: View {
             Button("Cancel", role: .cancel) {}
         }
         .sheet(isPresented: $showImagePicker) {
-            ImagePicker(sourceType: imagePickerSource, selectedImage: $selectedImage)
+            ImagePicker(sourceType: imagePickerSource, selectedImage: $viewModel.selectedImage)
         }
     }
 }
